@@ -11,22 +11,26 @@ function SignUp(props) {
   return (
     <React.Fragment>
       <Input
+        value={vm.user.username}
         placeholder={'Username'}
         onChange={(e) => vm.onChange('username', e.target.value)}
       />
       {fields_spacing}
       <Input
+        value={vm.user.email}
         placeholder={'Email Adress'}
         onChange={(e) => vm.onChange('email', e.target.value)}
       />
       {fields_spacing}
       <Input
+        value={vm.user.password}
         placeholder={'Password'}
         type={'password'}
         onChange={(e) => vm.onChange('password', e.target.value)}
       />
       {fields_spacing}
       <Input
+        value={vm.user.confirm_password}
         placeholder={'Confirm Password'}
         type={'password'}
         onChange={(e) => vm.onChange('confirm_password', e.target.value)}

@@ -1,4 +1,4 @@
-import { decorate, observable, toJS } from 'mobx';
+import { decorate, observable } from 'mobx';
 import firebase from 'firebase';
 class SignUpStore {
   constructor([{ usersStore }, props]) {
@@ -7,12 +7,38 @@ class SignUpStore {
     this.usersStore = usersStore;
   }
   onChange(key, value) {
-    this.user[key] = value;
+    this.user[key] = value.replace(/\s/g, '');
+  }
+
+  isAllFilled(obj) {
+    let _isAllFilled = true;
+    for (var key in obj) {
+      _isAllFilled = _isAllFilled && obj[key] !== '';
+    }
+    return _isAllFilled;
+  }
+
+  isPasswordsMatch() {
+    return this.user.password === this.user.confirm_password;
+  }
+
+  isUsernameExist() {
+    let _isUsernameExist = false;
+    let _users = this.usersStore.users;
+    for (var key in _users) {
+      _isUsernameExist =
+        _isUsernameExist || _users[key].username === this.user.username;
+    }
+    return _isUsernameExist;
   }
 
   singUp() {
-    // console.log(this.usersStore);
-    firebase.database().ref('/users').push(this.user);
+    if (
+      this.isAllFilled(this.user) &&
+      this.isPasswordsMatch() &&
+      !this.isUsernameExist()
+    )
+      firebase.database().ref('/users').push(this.user);
     setTimeout(() => {
       this.usersStore.getUsers();
     }, 2000);

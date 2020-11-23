@@ -16,8 +16,7 @@ class UsersStore {
       .once('value')
       .then(function (snapshot) {
         if (snapshot.val().users) {
-          _this.users = snapshot.val().user;
-          console.log(snapshot.val().users);
+          _this.users = snapshot.val().users;
         }
       });
   }
