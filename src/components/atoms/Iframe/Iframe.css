@@ -1,0 +1,14 @@
+.t_iframe {
+  border: 0;
+}
+
+.t_iframe.popup_video {
+  width: calc(100vw - 37%);
+  height: 100vh;
+}
+
+@media screen and (max-width: 992px) {
+  .t_iframe.popup_video {
+    width: calc(100vw - 10%);
+  }
+}

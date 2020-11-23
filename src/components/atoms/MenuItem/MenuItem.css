@@ -1,0 +1,6 @@
+.t_menu_item {
+  transition: opacity 0.15s;
+}
+.t_menu_item:hover {
+  opacity: 1 !important;
+}

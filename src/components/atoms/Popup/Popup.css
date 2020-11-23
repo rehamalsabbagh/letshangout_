@@ -1,0 +1,36 @@
+.t_popup {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+  background-color: #00000054;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.t_popup.close {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.t_popup_close {
+  position: absolute;
+  color: #fff;
+  top: 23px;
+  right: 23px;
+  border: 2px solid;
+  border-radius: 100px;
+  padding: 6px;
+  z-index: 9;
+}
+
+@media screen and (max-width: 992px) {
+  .t_popup_close {
+    right: 19px;
+    top: 8px;
+  }
+}
