@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Fade from './Fade/Fade';
 import Slide from './Slide/Slide';
 import Expand from './Expand/Expand';
-import { useAppContext } from '../../../Context/AppContext';
+import { useAppContext } from '../../../context/AppContext';
 import { observer } from 'mobx-react-lite';
 import GeneralUtil from '../../../utils/GeneralUtil';
 
@@ -18,7 +18,8 @@ function Animation(props) {
       if (props.on === 'load' && !appear) setAppear(true);
     }, 1000);
     if (props.on === 'scroll' && !appear && scroll)
-      if (windowStore.scroll + windowStore.height * 0.35 >= scroll) setAppear(true);
+      if (windowStore.scroll + windowStore.height * 0.35 >= scroll)
+        setAppear(true);
   }
 
   if (props.on !== 'external') props.appear = appear;
@@ -26,7 +27,9 @@ function Animation(props) {
     props.id = animationId;
     setTimeout(() => {
       if (scroll === null && document.getElementById(animationId)) {
-        setScroll(document.getElementById(animationId).getBoundingClientRect().top);
+        setScroll(
+          document.getElementById(animationId).getBoundingClientRect().top
+        );
       }
     }, 1);
   }

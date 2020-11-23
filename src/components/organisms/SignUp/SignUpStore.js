@@ -1,39 +1,24 @@
-import { decorate, observable } from 'mobx';
+import { decorate, observable, toJS } from 'mobx';
 import firebase from 'firebase';
-import { useAppContext } from '../../../Context/AppContext';
-
 class SignUpStore {
-  constructor() {
+  constructor([{ usersStore }, props]) {
     this.user = { username: '', email: '', password: '', confirm_password: '' };
     this.valid = true;
+    this.usersStore = usersStore;
   }
-
   onChange(key, value) {
     this.user[key] = value;
-    console.log(JSON.parse(JSON.stringify(this.user)));
   }
 
   singUp() {
-    let _this = this;
-    firebase
-      .database()
-      .ref('/users')
-      .set({
-        // users: {
-        ...JSON.parse(JSON.stringify(useAppContext.usersStore.users)),
-        ...{ [`${this.user.username}`]: this.user },
-        // },
-      });
+    // console.log(this.usersStore);
+    firebase.database().ref('/users').push(this.user);
     setTimeout(() => {
-      useAppContext.usersStore.getUsers();
+      this.usersStore.getUsers();
     }, 2000);
   }
-
-  setCurrentUser() {}
 }
 decorate(SignUpStore, {
   user: observable,
 });
-
-let signUpStore = new SignUpStore();
-export default signUpStore;
+export default SignUpStore;

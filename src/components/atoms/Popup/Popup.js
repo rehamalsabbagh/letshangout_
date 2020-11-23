@@ -3,7 +3,7 @@ import GeneralUtil from '../../../utils/GeneralUtil';
 import Center from '../Center/Center';
 import Icon from '../Icon/Icon';
 import { observer } from 'mobx-react-lite';
-import { useAppContext } from '../../../Context/AppContext';
+import { useAppContext } from '../../../context/AppContext';
 
 function Poppup(props) {
   require('./Popup.css');
