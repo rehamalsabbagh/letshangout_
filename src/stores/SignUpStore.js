@@ -22,7 +22,11 @@ class SignUpStore {
       !this.usersStore.retriveUser(this.user.username) &&
       this.isPasswordsMatch()
     ) {
-      firebase.database().ref('/users').push(this.user);
+      firebase.database().ref('/users').push({
+        username: this.username,
+        password: this.password,
+        email: this.email,
+      });
       setTimeout(() => {
         this.usersStore.getUsers();
         setTimeout(() => {

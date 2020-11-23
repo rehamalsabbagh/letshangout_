@@ -25,7 +25,8 @@ class SignInStore {
     ) {
       this.setUser(_user);
       this.signedin = true;
-      console.log('success');
+      console.log(_user);
+      // console.log('success');
     }
   }
 }
