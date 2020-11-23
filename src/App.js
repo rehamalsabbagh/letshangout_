@@ -6,26 +6,15 @@ import Header from './components/organisms/Header/Header';
 import CentralPage from './components/organisms/CentralPage/CentralPage';
 import SignUpIn from './components/organisms/SignUpIn/SignUpIn';
 import './App.css';
-
-// function store(value) {
-//   console.log(value);
-//   firebase
-//     .database()
-//     .ref()
-//     .set({
-//       kw: {
-//         collect: JSON.stringify(value),
-//       },
-//     });
-// }
+import { useAppContext } from './context';
 
 function App() {
-  let userExist = false;
+  let { signInStore } = useAppContext();
 
   return (
     <Container className={'App'} dir={'ltr'}>
-      {userExist && <PageTemplate header={<Header />} body={null} />}
-      {!userExist && <CentralPage body={<SignUpIn />} />}
+      {signInStore.signedin && <PageTemplate header={<Header />} body={null} />}
+      {!signInStore.signedin && <CentralPage body={<SignUpIn />} />}
     </Container>
   );
 }

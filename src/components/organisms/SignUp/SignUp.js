@@ -3,43 +3,54 @@ import Input from '../../atoms/Input/Input';
 import Spacing from '../../atoms/Spacing/Spacing';
 import Button from '../../atoms/Button/Button';
 import { observer } from 'mobx-react';
-import SingUpStore from './SignUpStore';
-import { useAppContext, useVm } from '../../../context/index.js';
-function SignUp(props) {
-  const vm = useVm(SingUpStore, [useAppContext(), props]);
+import { useAppContext } from '../../../context/index.js';
+
+function SignUp() {
+  const { signUpStore } = useAppContext();
+  const { signInStore } = useAppContext();
+
   let fields_spacing = <Spacing space={{ lg: 10 }} />;
   return (
     <React.Fragment>
       <Input
-        value={vm.user.username}
+        value={signUpStore.user.username}
         placeholder={'Username'}
-        onChange={(e) => vm.onChange('username', e.target.value)}
+        onChange={(e) => signUpStore.onChange('username', e.target.value)}
       />
       {fields_spacing}
       <Input
-        value={vm.user.email}
+        value={signUpStore.user.email}
         placeholder={'Email Adress'}
-        onChange={(e) => vm.onChange('email', e.target.value)}
+        onChange={(e) => signUpStore.onChange('email', e.target.value)}
       />
       {fields_spacing}
       <Input
-        value={vm.user.password}
+        value={signUpStore.user.password}
         placeholder={'Password'}
         type={'password'}
-        onChange={(e) => vm.onChange('password', e.target.value)}
+        onChange={(e) => signUpStore.onChange('password', e.target.value)}
       />
       {fields_spacing}
       <Input
-        value={vm.user.confirm_password}
+        value={signUpStore.user.confirm_password}
         placeholder={'Confirm Password'}
         type={'password'}
-        onChange={(e) => vm.onChange('confirm_password', e.target.value)}
+        onChange={(e) =>
+          signUpStore.onChange('confirm_password', e.target.value)
+        }
       />
       {fields_spacing}
       <Button
         text={{ text: 'Sign Up' }}
         onClick={() => {
-          vm.singUp();
+          signUpStore.singUp(() => {
+            signInStore.setUser(signUpStore.user);
+            signInStore.singIn();
+          });
+          // setTimeout(() => {
+          //   signInStore.setUser(signUpStore.user);
+          //   signInStore.singIn();
+          // }, 2500);
         }}
       />
     </React.Fragment>
