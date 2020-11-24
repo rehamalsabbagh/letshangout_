@@ -1,4 +1,4 @@
-.t_select {
+.lho_select {
   border: 0;
   background-color: transparent;
   appearance: none;
@@ -7,8 +7,8 @@
   background-repeat: no-repeat;
 }
 
-.t_select.flat,
-.t_select.bordered {
+.lho_select.flat,
+.lho_select.bordered {
   color: #7c7c7c;
   height: 46px;
   border-radius: 5px;
@@ -19,10 +19,10 @@
   width: 100%;
 }
 
-.t_select.bordered {
+.lho_select.bordered {
   border: 2px solid;
 }
 
-.t_select.icon {
+.lho_select.icon {
   color: transparent;
 }

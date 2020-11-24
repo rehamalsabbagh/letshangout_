@@ -7,7 +7,7 @@ function Icon(props) {
   let _props = {
     ...props,
     ...{
-      className: props.className + ' fa-' + props.size + ' t_icon',
+      className: props.className + ' fa-' + props.size + ' lho_icon',
       style: GeneralUtil.responsiveObj(props.style),
     },
   };

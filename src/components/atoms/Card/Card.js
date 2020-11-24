@@ -5,8 +5,8 @@ function Card(props) {
   require('./Card.css');
 
   return (
-    <Container {...props} className={props.className + ' t_card'}>
-      <Container className={' t_card_body'}>{props.children}</Container>
+    <Container {...props} className={props.className + ' lho_card'}>
+      <Container className={' lho_card_body'}>{props.children}</Container>
     </Container>
   );
 }

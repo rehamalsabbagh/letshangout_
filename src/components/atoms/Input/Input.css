@@ -1,15 +1,15 @@
-.t_input_container {
+.lho_input_container {
   height: 46px;
   border-radius: 5px;
   background-color: #ececec;
   padding: 0px 15px;
 }
 
-.t_input_container.bordered {
+.lho_input_container.bordered {
   border: 1px solid;
 }
 
-.t_input {
+.lho_input {
   border: none;
   outline: 0px;
   width: 100%;
@@ -22,15 +22,15 @@
   color: #7c7c7c;
 }
 
-.t_input:focus {
+.lho_input:focus {
   outline: 0px;
 }
 
-.t_input_prefix {
+.lho_input_prefix {
   margin-top: -1px;
 }
 
-.t_error_1 {
+.lho_error_1 {
   background-color: #fef3f3 !important;
   border-color: #eadada !important;
 }

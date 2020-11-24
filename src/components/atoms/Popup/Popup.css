@@ -1,4 +1,4 @@
-.t_popup {
+.lho_popup {
   position: fixed;
   width: 100%;
   height: 100%;
@@ -12,12 +12,12 @@
   cursor: pointer;
 }
 
-.t_popup.close {
+.lho_popup.close {
   opacity: 0;
   pointer-events: none;
 }
 
-.t_popup_close {
+.lho_popup_close {
   position: absolute;
   color: #fff;
   top: 23px;
@@ -29,7 +29,7 @@
 }
 
 @media screen and (max-width: 992px) {
-  .t_popup_close {
+  .lho_popup_close {
     right: 19px;
     top: 8px;
   }

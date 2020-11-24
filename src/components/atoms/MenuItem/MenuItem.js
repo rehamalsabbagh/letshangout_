@@ -7,7 +7,7 @@ function MenuItem(props) {
   require('./MenuItem.css');
   return (
     <Row
-      className={'t_menu_item'}
+      className={'lho_menu_item'}
       style={{ lg: { opacity: props.active ? 1 : 0.6, cursor: 'pointer' } }}
       spacing={{ lg: 7 }}
     >

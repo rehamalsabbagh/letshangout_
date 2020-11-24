@@ -13,7 +13,7 @@ function Button(props) {
   return (
     <button
       style={style}
-      className={props.className + ' t_button ' + props.shape}
+      className={props.className + ' lho_button ' + props.shape}
       onMouseOver={() => setHover(true)}
       onMouseOut={() => setHover(false)}
       onClick={() => props.onClick()}

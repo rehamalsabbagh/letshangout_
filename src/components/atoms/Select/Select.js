@@ -22,7 +22,7 @@ function Select(props) {
   let style = GeneralUtil.responsiveObj(props.style);
   let className =
     props.className +
-    ' t_select ' +
+    ' lho_select ' +
     props.shape +
     ' fa-' +
     props.iconSize +
