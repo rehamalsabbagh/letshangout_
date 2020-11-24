@@ -1,37 +1,25 @@
 import React from 'react';
-import GeneralUtil from '../../../utils/GeneralUtil';
 import Center from '../Center/Center';
-import Icon from '../Icon/Icon';
 import { observer } from 'mobx-react-lite';
 import { useAppContext } from '../../../context/AppContext';
+import Container from '../Container/Container';
 
 function Poppup(props) {
   require('./Popup.css');
-  let style = GeneralUtil.responsiveObj(props.style);
-  let className = props.className + ' lho_popup ';
-  const { controllers } = useAppContext();
-  const controller = controllers.popup;
+  const className = props.className + ' lho_popup ';
+  const { popupStore } = useAppContext();
 
   return (
-    <div
-      className={className + controller.state}
-      style={style}
-      onClick={() => controller.setState({ state: 'close' })}
+    <Container
+      {...props}
+      className={className + popupStore.state}
+      onClick={() => popupStore.setState({ state: 'close' })}
     >
-      {/* <Icon className={'fas fa-times lho_popup_close'} size={'md'} /> */}
-      <Center
-        style={{ lg: { cursor: 'auto' } }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        {controller.child}
+      <Center style={{ cursor: 'auto' }} onClick={(e) => e.stopPropagation()}>
+        {popupStore.child}
       </Center>
-    </div>
+    </Container>
   );
 }
-
-Poppup.defaultProps = {
-  style: {},
-  className: '',
-};
 
 export default observer(Poppup);

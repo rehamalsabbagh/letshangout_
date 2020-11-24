@@ -5,7 +5,6 @@ import Icon from '../../atoms/Icon/Icon';
 import Row from '../../atoms/Row/Row';
 import TextLogo from '../../atoms/TextLogo/TextLogo';
 import { useAppContext } from '../../../context/AppContext';
-
 import './Header.css';
 let account_src =
   'https://www.flaticon.com/svg/static/icons/svg/1738/1738691.svg';
@@ -15,6 +14,7 @@ let signout_src =
 function Header() {
   let { signInStore } = useAppContext();
   let iconStyle = { cursor: 'pointer' };
+
   return (
     <Container className={'lho_header'}>
       <Container className={'page_container'}>

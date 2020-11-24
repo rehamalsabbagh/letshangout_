@@ -7,12 +7,14 @@ import CentralPage from './components/organisms/CentralPage/CentralPage';
 import SignUpIn from './components/organisms/SignUpIn/SignUpIn';
 import './App.css';
 import { useAppContext } from './context';
+import Popup from './components/atoms/Popup/Popup';
 
 function App() {
   let { signInStore } = useAppContext();
 
   return (
     <Container className={'App'} dir={'ltr'}>
+      <Popup />
       {signInStore.authenticated && (
         <PageTemplate header={<Header />} body={null} />
       )}

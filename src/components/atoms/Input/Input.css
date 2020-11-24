@@ -34,3 +34,15 @@
   background-color: #fef3f3 !important;
   border-color: #eadada !important;
 }
+
+input[type='file'] {
+  opacity: 0;
+  z-index: -1;
+  height: 100%;
+  cursor: pointer;
+}
+
+.lho_input_file {
+  background-image: url(https://www.flaticon.com/svg/static/icons/svg/186/186309.svg);
+  background-position: center;
+}

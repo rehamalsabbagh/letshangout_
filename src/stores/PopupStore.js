@@ -1,8 +1,7 @@
 import React from 'react';
-import ComposeUtil from '../../../utils/ComposeUtil';
 import { decorate, observable } from 'mobx';
 
-class PopupController {
+class PopupStore {
   constructor() {
     this.state = 'close';
     this.child = <React.Fragment />;
@@ -10,13 +9,13 @@ class PopupController {
 
   setState(args) {
     this.state = args.state;
-    this.child = ComposeUtil.composeComponent(args.child);
+    this.child = args.child;
   }
 }
 
-decorate(PopupController, {
+decorate(PopupStore, {
   state: observable,
   child: observable,
 });
 
-export default new PopupController();
+export default new PopupStore();

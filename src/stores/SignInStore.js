@@ -9,6 +9,7 @@ class SignInStore {
     this.usersStore = usersStore;
     this.authenticated = false;
     this.errorMessages = [];
+    this.authUser = null;
     this.user = {
       username: DEFAULT_FIELD_VALUE,
       password: DEFAULT_FIELD_VALUE,
@@ -49,6 +50,7 @@ class SignInStore {
     const _allTrue = FormUtil.allTrue(_booleans);
     if (!_allTrue) this.handleErrors(_booleans);
     if (_allTrue) {
+      this.authUser = __user;
       this.authenticated = true;
     }
   }
@@ -71,5 +73,6 @@ decorate(SignInStore, {
   errorMessages: observable,
   authenticated: observable,
   user: observable,
+  authUser: observable,
 });
 export default SignInStore;

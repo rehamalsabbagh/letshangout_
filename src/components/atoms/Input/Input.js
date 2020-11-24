@@ -25,6 +25,8 @@ function Input(props) {
         props.shape +
         ' lho_error_' +
         props.error +
+        ' lho_input_' +
+        props.type +
         ' ' +
         props.className
       }
