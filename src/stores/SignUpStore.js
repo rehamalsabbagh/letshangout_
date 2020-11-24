@@ -11,6 +11,10 @@ class SignUpStore {
   constructor(usersStore) {
     this.usersStore = usersStore;
     this.errorMessages = [];
+    this.clearForm();
+  }
+
+  clearForm() {
     this.user = {
       email: DEFAULT_FIELD_VALUE,
       username: DEFAULT_FIELD_VALUE,
@@ -90,7 +94,10 @@ class SignUpStore {
       this.usersStore.getUsers();
       setTimeout(() => {
         if (signIn) signIn();
-      }, 500);
+        setTimeout(() => {
+          this.clearForm();
+        }, 500);
+      }, 1000);
     }, 2000);
   }
 }

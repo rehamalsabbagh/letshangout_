@@ -32,6 +32,10 @@ class SignInStore {
     this.user = user;
   }
 
+  singOut() {
+    this.authenticated = false;
+  }
+
   singIn() {
     this.clearErrorMessages();
     const _user = this.user.username.value;
@@ -45,7 +49,6 @@ class SignInStore {
     const _allTrue = FormUtil.allTrue(_booleans);
     if (!_allTrue) this.handleErrors(_booleans);
     if (_allTrue) {
-      this.setUser(__user);
       this.authenticated = true;
     }
   }
