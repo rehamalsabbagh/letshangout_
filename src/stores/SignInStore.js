@@ -1,17 +1,28 @@
 import { decorate, observable } from 'mobx';
 import FormUtil from './utils/FormUtil';
+import { DEFAULT_FIELD_VALUE } from './constants/FormConstants';
 
 class SignInStore {
   constructor(usersStore) {
     this.usersStore = usersStore;
+    this.authenticated = false;
+    this.errorMessages = [];
     this.user = {
-      username: { value: '', error: false },
-      password: { value: '', error: false },
+      username: DEFAULT_FIELD_VALUE,
+      password: DEFAULT_FIELD_VALUE,
     };
   }
 
   onChange(key, value) {
-    this.user[key].value = FormUtil.removeSpaces(value);
+    FormUtil.onChange(this.user[key], value);
+  }
+
+  addErrorMessage(message) {
+    FormUtil.addErrorMessage(this.errorMessages, message);
+  }
+
+  clearErrorMessages() {
+    FormUtil.clearErrorMessages(this.errorMessages, this.user);
   }
 
   setUser(user) {
@@ -21,18 +32,18 @@ class SignInStore {
   singIn() {
     const _user = this.usersStore.retriveUser(this.user.username.value);
     if (
-      FormUtil.isAllFilled(this.user) &&
       _user &&
-      _user.password === this.user.password.value
+      _user.password === this.user.password.value &&
+      FormUtil.isAllFilled(this.user)
     ) {
       this.setUser(_user);
-      this.signedin = true;
-      console.log(_user);
+      this.authenticated = true;
     }
   }
 }
 decorate(SignInStore, {
+  errorMessages: observable,
+  authenticated: observable,
   user: observable,
-  signedin: observable,
 });
 export default SignInStore;

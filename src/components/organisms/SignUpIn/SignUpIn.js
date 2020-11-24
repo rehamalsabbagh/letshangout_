@@ -10,7 +10,8 @@ import SignUp from '../SignUp/SignUp';
 function SignUpIn() {
   const [state, setState] = useState('signin');
   let fields_spacing = <Spacing space={{ lg: 10 }} />;
-  let button_text = state === 'signin' ? "I don't have an account" : 'Sign In';
+  let button_text =
+    state === 'signin' ? "I don't have an account" : 'I have an account';
 
   function switchState() {
     if (state === 'signin') setState('signup');

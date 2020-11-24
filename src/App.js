@@ -13,8 +13,10 @@ function App() {
 
   return (
     <Container className={'App'} dir={'ltr'}>
-      {signInStore.signedin && <PageTemplate header={<Header />} body={null} />}
-      {!signInStore.signedin && <CentralPage body={<SignUpIn />} />}
+      {signInStore.authenticated && (
+        <PageTemplate header={<Header />} body={null} />
+      )}
+      {!signInStore.authenticated && <CentralPage body={<SignUpIn />} />}
     </Container>
   );
 }
