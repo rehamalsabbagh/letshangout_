@@ -4,7 +4,7 @@ import Slide from './Slide/Slide';
 import Expand from './Expand/Expand';
 import { useAppContext } from '../../../context/AppContext';
 import { observer } from 'mobx-react-lite';
-import GeneralUtil from '../../../utils/GeneralUtil';
+import GeneralUtil from '../../utils/GeneralUtil';
 
 function Animation(props) {
   let { windowStore } = useAppContext();

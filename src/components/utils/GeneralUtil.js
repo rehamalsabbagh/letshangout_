@@ -1,7 +1,7 @@
 class GeneralUtil {
-  //   static generateId(string) {
-  //     return string + '_' + Math.floor(Math.random() * 100000000000000000000);
-  //   }
+  static generateId(string) {
+    return string + '_' + Math.floor(Math.random() * 100000000000000000000);
+  }
 
   static extractFileName(src) {
     return src

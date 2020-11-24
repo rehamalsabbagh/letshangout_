@@ -24,11 +24,12 @@ class SignUpStore {
   }
 
   addErrorMessage(message) {
-    FormUtil.addErrorMessage(this.errorMessages, message);
+    this.errorMessages = FormUtil.addToArray(this.errorMessages, message);
   }
 
   clearErrorMessages() {
-    FormUtil.clearErrorMessages(this.errorMessages, this.user);
+    this.errorMessages = [];
+    FormUtil.clearErrorMessages(this.user);
   }
 
   isPasswordsMatch() {
@@ -36,6 +37,7 @@ class SignUpStore {
   }
 
   singUp(signIn) {
+    this.clearErrorMessages();
     const _username = this.user.username.value;
     const _password = this.user.password.value;
     const _booleans = {

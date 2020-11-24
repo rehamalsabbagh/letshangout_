@@ -18,11 +18,12 @@ class SignInStore {
   }
 
   addErrorMessage(message) {
-    FormUtil.addErrorMessage(this.errorMessages, message);
+    this.errorMessages = FormUtil.addToArray(this.errorMessages, message);
   }
 
   clearErrorMessages() {
-    FormUtil.clearErrorMessages(this.errorMessages, this.user);
+    this.errorMessages = [];
+    FormUtil.clearErrorMessages(this.user);
   }
 
   setUser(user) {

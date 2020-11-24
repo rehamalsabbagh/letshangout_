@@ -4,12 +4,11 @@ class FormUtil {
     obj.value = value.replace(/\s/g, '');
   }
 
-  static addErrorMessage(errorMessages, message) {
-    errorMessages = [...errorMessages, ...[message]];
+  static addToArray(errorMessages, message) {
+    return [...errorMessages, ...[message]];
   }
 
-  static clearErrorMessages(messages, obj) {
-    messages = [];
+  static clearErrorMessages(obj) {
     for (var key in obj) obj[key].error = undefined;
   }
 
