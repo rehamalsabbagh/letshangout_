@@ -5,10 +5,12 @@ import Icon from '../../atoms/Icon/Icon';
 import Row from '../../atoms/Row/Row';
 import TextLogo from '../../atoms/TextLogo/TextLogo';
 import './Header.css';
+let account_src =
+  'https://www.flaticon.com/svg/static/icons/svg/1738/1738691.svg';
+let signout_src =
+  'https://www.flaticon.com/svg/static/icons/svg/251/251376.svg';
 
 function Header() {
-  let account_src =
-    'https://www.flaticon.com/svg/static/icons/svg/1738/1738691.svg';
   return (
     <Container className={'lho_header'}>
       <Container className={'page_container'}>
@@ -17,7 +19,10 @@ function Header() {
             <TextLogo text={'Letshangout'} />
           </Align>
           <Align align={{ lg: 'end' }}>
-            <Icon src={account_src} size={'md'} />
+            <Row spacing={{ lg: 10 }} verticalAlign={'middle'}>
+              <Icon src={signout_src} size={'md'} />
+              <Icon src={account_src} size={'md'} />
+            </Row>
           </Align>
         </Row>
       </Container>

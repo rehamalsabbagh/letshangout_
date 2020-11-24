@@ -2,11 +2,11 @@ import { decorate, observable } from 'mobx';
 import firebase from 'firebase';
 import FormUtil from './utils/FormUtil';
 import { DEFAULT_FIELD_VALUE } from './constants/FormConstants';
-const empty_err_msg = 'The hieghligted fields are requirerd';
+const empty_err_msg = 'The highlighted fields are requirerd';
 const match_err_msg = 'Passwords do not match';
 const user_exist_err_msg = 'This username is already registered';
-const usr_ln_err_msg = 'Username needs to be five characters length at least';
-const pas_ln_err_msg = 'Password needs to be six characters length at least';
+const usr_ln_err_msg = 'Username needs to be 5 characters long at least';
+const pas_ln_err_msg = 'Password needs to be 6 characters long at least';
 class SignUpStore {
   constructor(usersStore) {
     this.usersStore = usersStore;
@@ -15,7 +15,7 @@ class SignUpStore {
       email: DEFAULT_FIELD_VALUE,
       username: DEFAULT_FIELD_VALUE,
       password: DEFAULT_FIELD_VALUE,
-      confirm_password: DEFAULT_FIELD_VALUE,
+      confirmPassword: DEFAULT_FIELD_VALUE,
     };
   }
 
@@ -33,19 +33,19 @@ class SignUpStore {
   }
 
   isPasswordsMatch() {
-    return this.user.password.value === this.user.confirm_password.value;
+    return this.user.password.value === this.user.confirmPassword.value;
   }
 
   singUp(signIn) {
     this.clearErrorMessages();
-    const _username = this.user.username.value;
-    const _password = this.user.password.value;
+    const _user = this.user.username.value;
+    const _pass = this.user.password.value;
     const _booleans = {
       _isAllFilled: FormUtil.isAllFilled(this.user),
       _isPasswordsMatch: this.isPasswordsMatch(),
-      _isUsernameAvaliable: !this.usersStore.retriveUser(_username),
-      _isUsernameMinimunLength: FormUtil.isMinimunLength(5, _username),
-      _isPasswordMinimunLength: FormUtil.isMinimunLength(6, _password),
+      _isUsernameAvaliable: !this.usersStore.retriveUser(_user),
+      _isUsernameMinimunLength: FormUtil.isMinimunLength(5, _user),
+      _isPasswordMinimunLength: FormUtil.isMinimunLength(6, _pass),
     };
     const _allTrue = FormUtil.allTrue(_booleans);
     if (!_allTrue) this.handleErrors(_booleans);
@@ -58,7 +58,7 @@ class SignUpStore {
   handleErrors(booleans) {
     if (!booleans._isPasswordsMatch) {
       this.addErrorMessage(match_err_msg);
-      this.user.confirm_password.error = 1;
+      this.user.confirmPassword.error = 1;
     }
     if (!booleans._isUsernameAvaliable) {
       this.addErrorMessage(user_exist_err_msg);

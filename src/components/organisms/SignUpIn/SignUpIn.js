@@ -12,6 +12,8 @@ import Text from '../../atoms/Text/Text';
 import ErrorCard from '../../atoms/ErrorCard/ErrorCard';
 import { useAppContext } from '../../../context';
 import { observer } from 'mobx-react-lite';
+let signin_button_text = "I don't have an account";
+let signup_button_text = 'I have an account';
 
 function SignUpIn() {
   const [state, setState] = useState('signin');
@@ -25,18 +27,23 @@ function SignUpIn() {
   }
 
   function errMsgs(_errMsgs) {
-    // console.log(_errMsgs);
     if (!_errMsgs.length) return false;
-    return _errMsgs.map((_errMsg) => <Text text={'● ' + _errMsg} />);
+    return _errMsgs.map((_errMsg, key) => (
+      <Text key={key} text={'● ' + _errMsg} />
+    ));
   }
 
   let _errMsgs;
-  if (state === 'signin') _errMsgs = errMsgs(signInStore.errorMessages);
-  if (state === 'signup') _errMsgs = errMsgs(signUpStore.errorMessages);
+  let switch_button_text;
+  if (state === 'signin') {
+    _errMsgs = errMsgs(signInStore.errorMessages);
+    switch_button_text = signin_button_text;
+  }
+  if (state === 'signup') {
+    _errMsgs = errMsgs(signUpStore.errorMessages);
+    switch_button_text = signup_button_text;
+  }
 
-  let button_text;
-  if (state === 'signin') button_text = "I don't have an account";
-  if (state === 'signup') button_text = 'I have an account';
   return (
     <Popover
       appear={true}
@@ -53,7 +60,7 @@ function SignUpIn() {
                 onClick={() => switchState()}
                 shape={'bordered'}
                 text={{
-                  text: button_text,
+                  text: switch_button_text,
                 }}
               />
             </Align>
