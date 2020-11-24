@@ -3,13 +3,15 @@ import FormUtil from './utils/FormUtil';
 
 class SignInStore {
   constructor(usersStore) {
-    this.user = { username: '', password: '' };
-    this.signedin = false;
     this.usersStore = usersStore;
+    this.user = {
+      username: { value: '', error: false },
+      password: { value: '', error: false },
+    };
   }
 
   onChange(key, value) {
-    this.user[key] = FormUtil.removeSpaces(value);
+    this.user[key].value = FormUtil.removeSpaces(value);
   }
 
   setUser(user) {
@@ -17,16 +19,15 @@ class SignInStore {
   }
 
   singIn() {
-    const _user = this.usersStore.retriveUser(this.user.username);
+    const _user = this.usersStore.retriveUser(this.user.username.value);
     if (
       FormUtil.isAllFilled(this.user) &&
       _user &&
-      _user.password === this.user.password
+      _user.password === this.user.password.value
     ) {
       this.setUser(_user);
       this.signedin = true;
       console.log(_user);
-      // console.log('success');
     }
   }
 }

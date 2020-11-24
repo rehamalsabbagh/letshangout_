@@ -13,26 +13,30 @@ function SignUp() {
   return (
     <React.Fragment>
       <Input
-        value={signUpStore.user.username}
+        error={signUpStore.user.username.error}
+        value={signUpStore.user.username.value}
         placeholder={'Username'}
         onChange={(e) => signUpStore.onChange('username', e.target.value)}
       />
       {fields_spacing}
       <Input
-        value={signUpStore.user.email}
+        error={signUpStore.user.email.error}
+        value={signUpStore.user.email.value}
         placeholder={'Email Adress'}
         onChange={(e) => signUpStore.onChange('email', e.target.value)}
       />
       {fields_spacing}
       <Input
-        value={signUpStore.user.password}
+        error={signUpStore.user.password.error}
+        value={signUpStore.user.password.value}
         placeholder={'Password'}
         type={'password'}
         onChange={(e) => signUpStore.onChange('password', e.target.value)}
       />
       {fields_spacing}
       <Input
-        value={signUpStore.user.confirm_password}
+        error={signUpStore.user.confirm_password.error}
+        value={signUpStore.user.confirm_password.value}
         placeholder={'Confirm Password'}
         type={'password'}
         onChange={(e) =>

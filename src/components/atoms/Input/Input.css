@@ -29,3 +29,8 @@
 .t_input_prefix {
   margin-top: -1px;
 }
+
+.t_error_true {
+  background-color: #fef3f3 !important;
+  border-color: #eadada !important;
+}

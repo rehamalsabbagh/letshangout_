@@ -11,13 +11,15 @@ function SignIn() {
   return (
     <React.Fragment>
       <Input
-        value={signInStore.user.username}
+        error={signInStore.user.username.error}
+        value={signInStore.user.username.value}
         placeholder={'Username'}
         onChange={(e) => signInStore.onChange('username', e.target.value)}
       />
       {fields_spacing}
       <Input
-        value={signInStore.user.password}
+        error={signInStore.user.password.error}
+        value={signInStore.user.password.value}
         placeholder={'Password'}
         type={'password'}
         onChange={(e) => signInStore.onChange('password', e.target.value)}

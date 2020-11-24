@@ -19,8 +19,15 @@ function Input(props) {
 
   return (
     <div
-      className={props.className + ' t_input_container ' + props.shape}
       style={style}
+      className={
+        ' t_input_container ' +
+        props.shape +
+        ' t_error_' +
+        props.error +
+        ' ' +
+        props.className
+      }
     >
       {!props.prefix && _input}
       {props.prefix && (
