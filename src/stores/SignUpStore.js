@@ -24,7 +24,8 @@ class SignUpStore {
   }
 
   onChange(key, value) {
-    FormUtil.onChange(this.user[key], value);
+    FormUtil.clearError(this.user[key]);
+    FormUtil.storeTrimmedValue(this.user[key], value);
   }
 
   addErrorMessage(message) {

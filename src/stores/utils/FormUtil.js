@@ -1,7 +1,16 @@
+import React from 'react';
+import Text from '../../components/atoms/Text/Text';
 class FormUtil {
-  static onChange(obj, value) {
+  static clearError(obj) {
     obj.error = undefined;
+  }
+
+  static storeTrimmedValue(obj, value) {
     obj.value = value.replace(/\s/g, '');
+  }
+
+  static storeValue(obj, value) {
+    obj.value = value;
   }
 
   static addToArray(errorMessages, message) {
@@ -23,6 +32,13 @@ class FormUtil {
       _isAllFilled = _isAllFilled && obj[key].value !== '';
     }
     return _isAllFilled;
+  }
+
+  static errMsgs(_errMsgs) {
+    if (!_errMsgs.length) return false;
+    return _errMsgs.map((_errMsg, key) => (
+      <Text key={key} text={'● ' + _errMsg} />
+    ));
   }
 
   static allTrue(obj) {

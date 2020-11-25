@@ -6,26 +6,26 @@ function Row(props) {
     if (!children) return <React.Fragment />;
     if (!children.length) children = [children];
     let spaceStyle = { display: 'inline-block', width: spacing + 'px' };
-    let rows = 0;
-    portitions.map((portition) => {
-      portition = portition ? portition : 0;
-      rows += portition;
-    });
-    rows = Math.round(rows);
-    let all_spacing = spacing * (children.length - rows);
+    let _childrenInRow = parseInt(100 / (100 * portitions[0]));
+    let _spaceInRow = spacing * _childrenInRow - spacing;
     return children.map((child, key) => {
-      let break_point = children.length / rows;
       let _portition = portitions[key] * 100 + '%';
+      console.log(_childrenInRow);
       let childStyle = {
         width:
-          'calc(' + _portition + ' - ' + all_spacing / children.length + 'px)',
+          'calc(' + _portition + ' - ' + _spaceInRow / _childrenInRow + 'px)',
         display: 'inline-block',
         verticalAlign: props.verticalAlign,
       };
       return (
         <React.Fragment key={key}>
-          {key % break_point !== 0 && <div style={spaceStyle} />}
           <div style={childStyle}>{child}</div>
+          {key !== children.length - 1 && (key + 1) % _childrenInRow !== 0 && (
+            <div style={spaceStyle} />
+          )}
+          {(key + 1) % _childrenInRow === 0 && (
+            <div style={{ height: spacing + 'px' }} />
+          )}
         </React.Fragment>
       );
     });

@@ -1,23 +1,17 @@
 import React, { useState } from 'react';
-import Align from '../../atoms/Align/Align';
-import Card from '../../atoms/Card/Card';
 import Spacing from '../../atoms/Spacing/Spacing';
 import TextLogo from '../../atoms/TextLogo/TextLogo';
 import Button from '../../atoms/Button/Button';
 import SignIn from '../SignIn/SignIn';
 import SignUp from '../SignUp/SignUp';
-import Container from '../../atoms/Container/Container';
-import Popover from '../../atoms/Popover/Popover';
-import Text from '../../atoms/Text/Text';
-import ErrorCard from '../../atoms/ErrorCard/ErrorCard';
 import { useAppContext } from '../../../context';
 import { observer } from 'mobx-react-lite';
+import Form from '../Form/Form';
 let signin_button_text = "I don't have an account";
 let signup_button_text = 'I have an account';
 
 function SignUpIn() {
   const [state, setState] = useState('signin');
-  let fields_spacing = <Spacing space={{ lg: 10 }} />;
   let { signUpStore } = useAppContext();
   let { signInStore } = useAppContext();
 
@@ -26,58 +20,35 @@ function SignUpIn() {
     if (state === 'signup') setState('signin');
   }
 
-  function errMsgs(_errMsgs) {
-    if (!_errMsgs.length) return false;
-    return _errMsgs.map((_errMsg, key) => (
-      <Text key={key} text={'● ' + _errMsg} />
-    ));
+  function switchButton(_switch_button_text) {
+    return (
+      <Button
+        onClick={() => switchState()}
+        shape={'bordered'}
+        text={{
+          text: _switch_button_text,
+        }}
+      />
+    );
   }
 
+  let _fields;
   let _errMsgs;
-  let switch_button_text;
   if (state === 'signin') {
-    _errMsgs = errMsgs(signInStore.errorMessages);
-    switch_button_text = signin_button_text;
+    _errMsgs = signInStore.errorMessages;
+    _fields = [<SignIn />, switchButton(signin_button_text)];
   }
   if (state === 'signup') {
-    _errMsgs = errMsgs(signUpStore.errorMessages);
-    switch_button_text = signup_button_text;
+    _errMsgs = signUpStore.errorMessages;
+    _fields = [<SignUp />, switchButton(signup_button_text)];
   }
 
   return (
-    <Popover
-      appear={true}
-      trigger={
-        <Container>
-          <TextLogo text={'Letshangout'} level={{ lg: 'h2' }} />
-          <Spacing space={{ lg: 20 }} />
-          <Card>
-            <Align align={{ lg: 'start' }}>
-              {state === 'signin' && <SignIn />}
-              {state === 'signup' && <SignUp />}
-              {fields_spacing}
-              <Button
-                onClick={() => switchState()}
-                shape={'bordered'}
-                text={{
-                  text: switch_button_text,
-                }}
-              />
-            </Align>
-          </Card>
-        </Container>
-      }
-      content={
-        _errMsgs && (
-          <React.Fragment>
-            <Spacing space={{ lg: 20 }} />
-            <ErrorCard>
-              <Align align={{ lg: 'start' }}>{_errMsgs}</Align>
-            </ErrorCard>
-          </React.Fragment>
-        )
-      }
-    />
+    <React.Fragment>
+      <TextLogo text={'Letshangout'} level={{ lg: 'h2' }} />
+      <Spacing space={{ lg: 20 }} />
+      <Form fields={_fields} errorMessages={_errMsgs} />
+    </React.Fragment>
   );
 }
 
