@@ -2,29 +2,29 @@ import React from 'react';
 import { observer } from 'mobx-react';
 import { useAppContext } from '../../../context';
 import Row from '../../atoms/Row/Row';
-import Card from '../../atoms/Card/Card';
 import Align from '../../atoms/Align/Align';
+import Post from '../Post/Post';
 
-function PostsGrid() {
+function PostsGrid(props) {
   let { postsStore } = useAppContext();
-  let { signInStore } = useAppContext();
-  postsStore.getUserPosts(signInStore.authUser.key);
+  postsStore.getUserPosts(props.user.id);
 
   function posts() {
     if (!postsStore.posts) return;
     let _posts = [];
     let _count = 0;
     for (var key in postsStore.posts) {
+      let _post = { ...postsStore.posts[key], ...{ id: key } };
       _count++;
       _posts = [
         ..._posts,
         ...[
-          <Card key={_count}>
-            {postsStore.posts[key].name}
-            {postsStore.posts[key].date}
-            {postsStore.posts[key].time}
-            {postsStore.posts[key].location}
-          </Card>,
+          <Post
+            key={_count}
+            {..._post}
+            user={props.user}
+            showHeader={null}
+          ></Post>,
         ],
       ];
     }

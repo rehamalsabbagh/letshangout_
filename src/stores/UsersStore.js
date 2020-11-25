@@ -6,13 +6,14 @@ firebase.initializeApp(config);
 class UsersStore {
   constructor() {
     this.users = {};
+    this.authUser = null;
   }
 
   retriveUser(username) {
     let _user = false;
     for (var key in this.users) {
       if (this.users[key].username === username)
-        _user = { ...this.users[key], ...{ key: key } };
+        _user = { ...this.users[key], ...{ id: key } };
     }
     return _user;
   }
@@ -32,6 +33,7 @@ class UsersStore {
 }
 decorate(UsersStore, {
   users: observable,
+  authUser: observable,
 });
 
 let usersStore = new UsersStore();

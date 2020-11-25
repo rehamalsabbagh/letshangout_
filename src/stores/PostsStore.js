@@ -4,7 +4,8 @@ import { DEFAULT_FIELD_VALUE } from './constants/FormConstants';
 import FormUtil from './utils/FormUtil';
 const empty_err_msg = 'The highlighted fields are requirerd';
 class PostsStore {
-  constructor() {
+  constructor(usersStore) {
+    this.usersStore = usersStore;
     this.errorMessages = [];
     this.posts = null;
     this.clearForm();
@@ -34,14 +35,14 @@ class PostsStore {
     this.errorMessages = FormUtil.addToArray(this.errorMessages, message);
   }
 
-  addPost(userkey, callback) {
+  addPost(userId, callback) {
     this.clearErrorMessages();
     let _isAllFilled = FormUtil.isAllFilled(this.post);
     if (!_isAllFilled) this.addErrorMessage(empty_err_msg);
     if (_isAllFilled)
       firebase
         .database()
-        .ref('/posts/' + userkey)
+        .ref('/posts/' + userId)
         .push(
           {
             image: this.post.image.value,
@@ -56,18 +57,31 @@ class PostsStore {
         );
   }
 
-  getUserPosts(userkey) {
+  getUserPosts(userId) {
     let _this = this;
     if (_this.posts === null)
       firebase
         .database()
-        .ref()
-        .once('value')
-        .then(function (snapshot) {
-          if (snapshot.val() && snapshot.val().posts[userkey]) {
-            _this.posts = snapshot.val().posts[userkey];
-          }
+        .ref('/posts/' + userId)
+        .on('value', (snapshot) => {
+          _this.posts = snapshot.val();
         });
+  }
+
+  likePost(postId, userId) {
+    firebase
+      .database()
+      .ref('/posts/' + userId + '/' + postId + '/likes')
+      .push({
+        user: this.usersStore.authUser.id,
+      });
+  }
+
+  unlikePost(likeId, postId, userId) {
+    let likeRef = firebase
+      .database()
+      .ref('/posts/' + userId + '/' + postId + '/likes/' + likeId);
+    likeRef.remove();
   }
 }
 
@@ -77,4 +91,4 @@ decorate(PostsStore, {
   errorMessages: observable,
 });
 
-export default new PostsStore();
+export default PostsStore;

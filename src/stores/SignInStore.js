@@ -7,9 +7,7 @@ const wrong_pass_err_msg = 'Password is not correct';
 class SignInStore {
   constructor(usersStore) {
     this.usersStore = usersStore;
-    this.authenticated = false;
     this.errorMessages = [];
-    this.authUser = null;
     this.user = {
       username: DEFAULT_FIELD_VALUE,
       password: DEFAULT_FIELD_VALUE,
@@ -35,7 +33,7 @@ class SignInStore {
   }
 
   singOut() {
-    this.authenticated = false;
+    this.usersStore.authUser = null;
   }
 
   singIn() {
@@ -51,8 +49,7 @@ class SignInStore {
     const _allTrue = FormUtil.allTrue(_booleans);
     if (!_allTrue) this.handleErrors(_booleans);
     if (_allTrue) {
-      this.authUser = __user;
-      this.authenticated = true;
+      this.usersStore.authUser = __user;
     }
   }
 
@@ -74,6 +71,5 @@ decorate(SignInStore, {
   errorMessages: observable,
   authenticated: observable,
   user: observable,
-  authUser: observable,
 });
 export default SignInStore;

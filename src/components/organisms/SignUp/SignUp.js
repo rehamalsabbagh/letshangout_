@@ -51,10 +51,6 @@ function SignUp() {
             signInStore.setUser(signUpStore.user);
             signInStore.singIn();
           });
-          // setTimeout(() => {
-          //   signInStore.setUser(signUpStore.user);
-          //   signInStore.singIn();
-          // }, 2500);
         }}
       />
     </React.Fragment>

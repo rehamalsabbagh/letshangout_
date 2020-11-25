@@ -10,7 +10,6 @@ function Row(props) {
     let _spaceInRow = spacing * _childrenInRow - spacing;
     return children.map((child, key) => {
       let _portition = portitions[key] * 100 + '%';
-      console.log(_childrenInRow);
       let childStyle = {
         width:
           'calc(' + _portition + ' - ' + _spaceInRow / _childrenInRow + 'px)',

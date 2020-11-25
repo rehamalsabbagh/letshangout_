@@ -10,14 +10,17 @@ import './App.css';
 import UserPage from './components/templates/UserPage/UserPage';
 
 function App() {
-  let { signInStore } = useAppContext();
+  let { usersStore } = useAppContext();
 
   return (
     <Container className={'App'} dir={'ltr'}>
-      {signInStore.authenticated && (
-        <PageTemplate header={<Header />} body={<UserPage />} />
+      {usersStore.authUser && (
+        <PageTemplate
+          header={<Header />}
+          body={<UserPage user={usersStore.authUser} />}
+        />
       )}
-      {!signInStore.authenticated && <CentralPage body={<SignUpIn />} />}
+      {!usersStore.authUser && <CentralPage body={<SignUpIn />} />}
     </Container>
   );
 }

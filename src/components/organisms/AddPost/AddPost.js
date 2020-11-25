@@ -14,7 +14,7 @@ let addpost_btn_icon_src =
 
 function AddPost() {
   const { postsStore } = useAppContext();
-  const { signInStore } = useAppContext();
+  const { usersStore } = useAppContext();
 
   let addPostBtnIcon = {
     src: addpost_btn_icon_src,
@@ -67,7 +67,7 @@ function AddPost() {
               <Button
                 text={{ text: 'Add a hangout' }}
                 onClick={() =>
-                  postsStore.addPost(signInStore.authUser.key, () =>
+                  postsStore.addPost(usersStore.authUser.id, () =>
                     popupStore.setState('close')
                   )
                 }

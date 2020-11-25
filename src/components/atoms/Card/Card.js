@@ -6,7 +6,13 @@ function Card(props) {
 
   return (
     <Container {...props} className={props.className + ' lho_card'}>
-      <Container className={' lho_card_body'}>{props.children}</Container>
+      {props.header && (
+        <Container className={'lho_card_padding'}>{props.header}</Container>
+      )}
+      {props.image && (
+        <Container className={'lho_card_image'}>{props.image}</Container>
+      )}
+      <Container className={'lho_card_padding'}>{props.children}</Container>
     </Container>
   );
 }
