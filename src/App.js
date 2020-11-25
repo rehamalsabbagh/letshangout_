@@ -6,6 +6,8 @@ import Header from './components/organisms/Header/Header';
 import SignUpIn from './components/organisms/SignUpIn/SignUpIn';
 import { useAppContext } from './context';
 import CentralPage from './components/templates/CentralPage/CentralPage';
+import { Switch, Route, withRouter } from 'react-router-dom';
+
 import './App.css';
 import UserPage from './components/templates/UserPage/UserPage';
 
@@ -17,7 +19,20 @@ function App() {
       {usersStore.authUser && (
         <PageTemplate
           header={<Header />}
-          body={<UserPage user={usersStore.authUser} />}
+          body={
+            <Switch>
+              <Route
+                exact={true}
+                path={'/'}
+                render={() => <React.Fragment />}
+              />
+              <Route
+                exact={true}
+                path={'/:username'}
+                render={() => <UserPage user={usersStore.authUser} />}
+              />
+            </Switch>
+          }
         />
       )}
       {!usersStore.authUser && <CentralPage body={<SignUpIn />} />}
@@ -25,4 +40,4 @@ function App() {
   );
 }
 
-export default observer(App);
+export default withRouter(observer(App));

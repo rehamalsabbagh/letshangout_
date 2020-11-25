@@ -5,7 +5,9 @@ import Icon from '../../atoms/Icon/Icon';
 import Row from '../../atoms/Row/Row';
 import TextLogo from '../../atoms/TextLogo/TextLogo';
 import { useAppContext } from '../../../context/AppContext';
+import { Link } from 'react-router-dom';
 import './Header.css';
+
 let account_src =
   'https://www.flaticon.com/svg/static/icons/svg/1738/1738691.svg';
 let signout_src =
@@ -13,6 +15,7 @@ let signout_src =
 
 function Header() {
   let { signInStore } = useAppContext();
+  let { usersStore } = useAppContext();
   let iconStyle = { cursor: 'pointer' };
 
   return (
@@ -20,7 +23,9 @@ function Header() {
       <Container className={'page_container'}>
         <Row portitions={{ lg: [0.5, 0.5] }} verticalAlign={'middle'}>
           <Align align={{ lg: 'start' }}>
-            <TextLogo text={'Letshangout'} />
+            <Link to={'/'}>
+              <TextLogo text={'Letshangout'} />
+            </Link>
           </Align>
           <Align align={{ lg: 'end' }}>
             <Row spacing={{ lg: 10 }} verticalAlign={'middle'}>
@@ -30,7 +35,9 @@ function Header() {
                 style={iconStyle}
                 onClick={() => signInStore.singOut()}
               />
-              <Icon src={account_src} size={'md'} style={iconStyle} />
+              <Link to={'/' + usersStore.authUser.username}>
+                <Icon src={account_src} size={'md'} style={iconStyle} />
+              </Link>
             </Row>
           </Align>
         </Row>
