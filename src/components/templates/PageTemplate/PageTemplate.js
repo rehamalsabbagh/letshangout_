@@ -8,7 +8,7 @@ function PageTemplate(props) {
     <Container className={'lho_page'}>
       <AddPost />
       <Container className={'lho_page_header'}>{props.header}</Container>
-      <Spacing space={{ lg: 90, xs: 60 }} />
+      <Spacing space={{ lg: 100, xs: 80 }} />
       <Container className={'lho_page_body page_container'}>
         {props.body}
       </Container>

@@ -34,7 +34,7 @@ function PostsGrid(props) {
           lg: new Array(_count).fill(0.3333),
           xs: new Array(_count).fill(1),
         }}
-        spacing={{ lg: 10, xs: 0 }}
+        spacing={{ lg: 20, xs: 0 }}
       >
         {_posts}
       </Row>
