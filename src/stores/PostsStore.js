@@ -1,10 +1,13 @@
 import { decorate, observable } from 'mobx';
 import firebase from 'firebase';
 import { DEFAULT_FIELD_VALUE } from './constants/FormConstants';
-import FormUtil from './utils/FormUtil';
 class PostsStore {
   constructor() {
-    this.posts = {};
+    this.posts = null;
+    this.clearForm();
+  }
+
+  clearForm() {
     this.post = {
       image: DEFAULT_FIELD_VALUE,
       date: DEFAULT_FIELD_VALUE,
@@ -16,7 +19,6 @@ class PostsStore {
 
   onChange(key, value) {
     this.post[key].value = value;
-    console.log(value);
   }
 
   addPost(userkey) {
@@ -30,6 +32,20 @@ class PostsStore {
         location: this.post.location.value,
         description: this.post.description.value,
       });
+  }
+
+  getUserPosts(userkey) {
+    let _this = this;
+    if (_this.posts === null)
+      firebase
+        .database()
+        .ref()
+        .once('value')
+        .then(function (snapshot) {
+          if (snapshot.val() && snapshot.val().posts[userkey]) {
+            _this.posts = snapshot.val().posts[userkey];
+          }
+        });
   }
 }
 

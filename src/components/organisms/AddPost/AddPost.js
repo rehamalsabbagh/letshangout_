@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Container from '../../atoms/Container/Container';
 import Button from '../../atoms/Button/Button';
 import { useAppContext } from '../../../context/AppContext';
@@ -7,13 +7,14 @@ import Card from '../../atoms/Card/Card';
 import Spacing from '../../atoms/Spacing/Spacing';
 import Input from '../../atoms/Input/Input';
 import { observer } from 'mobx-react';
+import Popup from '../../atoms/Popup/Popup';
+import popupStore from '../../atoms/Popup/PopupStore';
 import './AddPost.css';
 
 let addpost_btn_icon_src =
   'https://www.flaticon.com/svg/static/icons/svg/864/864380.svg';
 
 function AddPost() {
-  const { popupStore } = useAppContext();
   const { postsStore } = useAppContext();
   const { signInStore } = useAppContext();
 
@@ -22,23 +23,25 @@ function AddPost() {
     size: 'lg',
   };
 
-  function openForm() {
-    let fieldss_space = <Spacing space={{ lg: 10 }} />;
-    popupStore.setState({
-      state: 'open',
-      child: (
+  let fieldss_space = <Spacing space={{ lg: 10 }} />;
+
+  return (
+    <Container className={'lho_addpost_container'}>
+      <Popup popupStore={popupStore}>
         <Container className={'page_container'}>
           <Align align={'start'}>
             <Card>
-              {/* <Input
+              <Input
+                error={postsStore.post.image.error}
                 value={postsStore.post.image.value}
                 type={'file'}
                 style={{ height: '200px' }}
                 accept={'image/x-png,image/gif,image/jpeg'}
                 onChange={(e) => postsStore.onChange('image', e.target.value)}
-              /> */}
+              />
               {fieldss_space}
               <Input
+                error={postsStore.post.date.error}
                 value={postsStore.post.date.value}
                 placeholder={'Date'}
                 type={'date'}
@@ -46,6 +49,7 @@ function AddPost() {
               />
               {fieldss_space}
               <Input
+                error={postsStore.post.time.error}
                 value={postsStore.post.time.value}
                 placeholder={'Time'}
                 type={'time'}
@@ -53,6 +57,7 @@ function AddPost() {
               />
               {fieldss_space}
               <Input
+                error={postsStore.post.location.error}
                 value={postsStore.post.location.value}
                 placeholder={'Location'}
                 onChange={(e) =>
@@ -61,6 +66,7 @@ function AddPost() {
               />
               {fieldss_space}
               <Input
+                error={postsStore.post.description.error}
                 value={postsStore.post.description.value}
                 placeholder={'Description'}
                 onChange={(e) =>
@@ -75,18 +81,13 @@ function AddPost() {
             </Card>
           </Align>
         </Container>
-      ),
-    });
-  }
-
-  return (
-    <Container className={'lho_addpost_container'}>
+      </Popup>
       <Button
         className={'lho_addpost_button'}
         primaryColor={'#ffffff'}
         secondaryColor={'#454545'}
         icon={addPostBtnIcon}
-        onClick={() => openForm()}
+        onClick={() => popupStore.setState('open')}
       />
     </Container>
   );
