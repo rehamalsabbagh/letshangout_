@@ -6,7 +6,6 @@ import Container from '../Container/Container';
 function Poppup(props) {
   require('./Popup.css');
   const className = props.className + ' lho_popup ';
-
   return (
     <Container
       {...props}

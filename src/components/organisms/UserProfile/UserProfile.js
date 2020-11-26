@@ -5,11 +5,13 @@ import Container from '../../atoms/Container/Container';
 import Image from '../../atoms/Image/Image';
 import Row from '../../atoms/Row/Row';
 import Spacing from '../../atoms/Spacing/Spacing';
+import Button from '../../atoms/Button/Button';
 import Text from '../../atoms/Text/Text';
 import { observer } from 'mobx-react';
 
 function UserProfile(props) {
   let { postsStore } = useAppContext();
+  let { usersStore } = useAppContext();
   let _posts = !postsStore.posts ? '0' : Object.keys(postsStore.posts).length;
   let _profileInfoProps = {
     style: { xs: { fontSize: '0.86rem' } },
@@ -33,6 +35,13 @@ function UserProfile(props) {
             <Text text={'0 followers'} {..._profileInfoProps} />
           </Row>
           <Spacing space={{ lg: 15, xs: 10 }} />
+          {usersStore.authUser.username !== props.user.username && (
+            <Button
+              text={{ text: 'Follow' }}
+              primaryColor={'#ffffff'}
+              secondaryColor={'#454545'}
+            />
+          )}
         </Container>
       </Row>
     </Align>

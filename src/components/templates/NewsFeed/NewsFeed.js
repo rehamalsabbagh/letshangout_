@@ -10,11 +10,12 @@ import PopupStore from '../../atoms/Popup/PopupStore';
 import './NewsFeed.css';
 import Popup from '../../atoms/Popup/Popup';
 import SearchAccounts from '../SearchAccounts/SearchAccounts';
+const popupStore = new PopupStore();
 let search_icon_src =
   'https://www.flaticon.com/svg/static/icons/svg/975/975658.svg';
 function NewsFeed(props) {
   const { usersStore } = useAppContext();
-  const popupStore = new PopupStore();
+
   return (
     <React.Fragment>
       <Popup popupStore={popupStore}>

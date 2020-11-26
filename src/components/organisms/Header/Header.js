@@ -10,19 +10,20 @@ import PopupStore from '../../atoms/Popup/PopupStore';
 import Popup from '../../atoms/Popup/Popup';
 import SearchAccounts from '../../templates/SearchAccounts/SearchAccounts';
 import './Header.css';
+const popupStore = new PopupStore();
 
-let account_src =
+const account_src =
   'https://www.flaticon.com/svg/static/icons/svg/1738/1738691.svg';
-let signout_src =
+const signout_src =
   'https://www.flaticon.com/svg/static/icons/svg/251/251376.svg';
 
-let search_src = 'https://www.flaticon.com/svg/static/icons/svg/482/482631.svg';
+const search_src =
+  'https://www.flaticon.com/svg/static/icons/svg/482/482631.svg';
 
 function Header() {
-  let { signInStore } = useAppContext();
-  let { usersStore } = useAppContext();
-  let popupStore = new PopupStore();
-  let iconStyle = { cursor: 'pointer' };
+  const { signInStore } = useAppContext();
+  const { usersStore } = useAppContext();
+  const iconStyle = { cursor: 'pointer' };
 
   return (
     <React.Fragment>
