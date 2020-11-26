@@ -76,12 +76,13 @@ class PostsStore {
       .on('value', (snapshot) => {
         let _snapshotValue = this.mergeWithIds(snapshot.val(), userId);
         if (connect) _this.posts = { ..._this.posts, ..._snapshotValue };
-        if (!connect) _this.posts = [];
+        if (!connect) _this.posts = null;
         if (!connect) _this.posts = _snapshotValue;
       });
   }
 
   mergeWithIds(posts, userId) {
+    if (!posts) return null;
     let _posts = {};
     for (const key in posts) {
       _posts = {
