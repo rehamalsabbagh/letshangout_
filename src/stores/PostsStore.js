@@ -50,6 +50,7 @@ class PostsStore {
             date: this.post.date.value,
             time: this.post.time.value,
             location: this.post.location.value,
+            user: userId,
           },
           () => {
             if (callback) callback();
@@ -74,21 +75,21 @@ class PostsStore {
       .database()
       .ref('/posts/' + userId)
       .on('value', (snapshot) => {
-        let _snapshotValue = this.mergeWithIds(snapshot.val(), userId);
+        let _snapshotValue = this.mergeWithIds(snapshot.val());
         if (connect) _this.posts = { ..._this.posts, ..._snapshotValue };
         if (!connect) _this.posts = null;
         if (!connect) _this.posts = _snapshotValue;
       });
   }
 
-  mergeWithIds(posts, userId) {
+  mergeWithIds(posts) {
     if (!posts) return null;
     let _posts = {};
     for (const key in posts) {
       _posts = {
         ..._posts,
         ...{
-          [`${key}`]: { ...posts[key], ...{ id: key }, ...{ user: userId } },
+          [`${key}`]: { ...posts[key], ...{ id: key } },
         },
       };
     }

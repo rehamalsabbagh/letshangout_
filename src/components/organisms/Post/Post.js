@@ -92,7 +92,7 @@ function Post(props) {
           <Text
             style={{ fontWeight: 500 }}
             className={'lho_post_info'}
-            text={_likes + ' likes'}
+            text={_likes + ' attendees'}
             level={'span'}
           />
         </Row>
