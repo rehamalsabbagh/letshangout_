@@ -12,8 +12,7 @@ class UsersStore {
   retriveUser(username) {
     let _user = false;
     for (var key in this.users) {
-      if (this.users[key].username === username)
-        _user = { ...this.users[key], ...{ id: key } };
+      if (this.users[key].username === username) _user = this.users[key];
     }
     return _user;
   }
@@ -35,11 +34,22 @@ class UsersStore {
       .ref('/users')
       .on('value', (snapshot) => {
         if (snapshot.val()) {
-          _this.users = snapshot.val();
+          _this.users = this.mergeWithIds(snapshot.val());
           if (_this.authUser)
             _this.authUser = this.retriveUser(_this.authUser.username);
         }
       });
+  }
+
+  mergeWithIds(users) {
+    let _users = {};
+    for (const key in users) {
+      _users = {
+        ..._users,
+        ...{ [`${key}`]: { ...users[key], ...{ id: key } } },
+      };
+    }
+    return _users;
   }
 
   follow(userId) {

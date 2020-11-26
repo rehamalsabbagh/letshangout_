@@ -32,12 +32,14 @@ function NewsFeed() {
       _posts = [
         ..._posts,
         ...[
-          <Post
-            {..._post}
-            key={_count}
-            // user={props.user}
-            showHeader={null}
-          ></Post>,
+          <React.Fragment key={key}>
+            {_count !== 0 && <Spacing space={{ lg: 45, xs: 30 }} />}
+            <Post
+              {..._post}
+              showHeader={1}
+              user={usersStore.users[_post.user]}
+            ></Post>
+          </React.Fragment>,
         ],
       ];
       _count++;

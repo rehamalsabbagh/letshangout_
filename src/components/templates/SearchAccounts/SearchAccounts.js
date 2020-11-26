@@ -21,7 +21,7 @@ function SearchAccounts(props) {
     let _filteredUsers = [];
     for (const key in usersStore.users) {
       if (usersStore.users[key].username.indexOf(string) > -1)
-        _filteredUsers.push({ ...usersStore.users[key], ...{ id: key } });
+        _filteredUsers.push(usersStore.users[key]);
     }
     setFilteredUsers(_filteredUsers);
   }

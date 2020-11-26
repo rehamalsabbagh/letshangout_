@@ -74,10 +74,24 @@ class PostsStore {
       .database()
       .ref('/posts/' + userId)
       .on('value', (snapshot) => {
-        if (connect) _this.posts = { ..._this.posts, ...snapshot.val() };
+        let _snapshotValue = this.mergeWithIds(snapshot.val(), userId);
+        if (connect) _this.posts = { ..._this.posts, ..._snapshotValue };
         if (!connect) _this.posts = [];
-        if (!connect) _this.posts = snapshot.val();
+        if (!connect) _this.posts = _snapshotValue;
       });
+  }
+
+  mergeWithIds(posts, userId) {
+    let _posts = {};
+    for (const key in posts) {
+      _posts = {
+        ..._posts,
+        ...{
+          [`${key}`]: { ...posts[key], ...{ id: key }, ...{ user: userId } },
+        },
+      };
+    }
+    return _posts;
   }
 
   likePost(postId, userId) {

@@ -18,7 +18,7 @@ function PostsGrid(props) {
     let _posts = [];
     let _count = 0;
     for (var key in postsStore.posts) {
-      let _post = { ...postsStore.posts[key], ...{ id: key } };
+      let _post = postsStore.posts[key];
       _count++;
       _posts = [
         ..._posts,
