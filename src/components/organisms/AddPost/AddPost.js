@@ -5,7 +5,7 @@ import { useAppContext } from '../../../context/AppContext';
 import Input from '../../atoms/Input/Input';
 import { observer } from 'mobx-react';
 import Popup from '../../atoms/Popup/Popup';
-import popupStore from '../../atoms/Popup/PopupStore';
+import PopupStore from '../../atoms/Popup/PopupStore';
 import Form from '../Form/Form';
 import './AddPost.css';
 
@@ -15,7 +15,7 @@ let addpost_btn_icon_src =
 function AddPost() {
   const { postsStore } = useAppContext();
   const { usersStore } = useAppContext();
-
+  const popupStore = new PopupStore();
   let addPostBtnIcon = {
     src: addpost_btn_icon_src,
     size: 'lg',

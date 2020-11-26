@@ -14,4 +14,4 @@ decorate(PopupStore, {
   state: observable,
 });
 
-export default new PopupStore();
+export default PopupStore;

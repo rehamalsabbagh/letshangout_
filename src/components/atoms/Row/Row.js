@@ -35,7 +35,7 @@ function Row(props) {
   let _children = children(props.children, _portitions, _spacing);
   let _style = GeneralUtil.responsiveObj(props.style);
   return (
-    <div className={props.className} style={_style}>
+    <div {...props} className={props.className} style={_style}>
       {_children}
     </div>
   );

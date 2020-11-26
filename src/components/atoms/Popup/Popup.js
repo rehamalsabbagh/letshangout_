@@ -14,7 +14,7 @@ function Poppup(props) {
       onClick={() => props.popupStore.setState('close')}
     >
       <Center style={{ cursor: 'auto' }} onClick={(e) => e.stopPropagation()}>
-        {props.children}
+        {props.popupStore.state === 'open' && props.children}
       </Center>
     </Container>
   );

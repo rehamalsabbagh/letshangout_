@@ -10,6 +10,7 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 
 import './App.css';
 import UserPage from './components/templates/UserPage/UserPage';
+import NewsFeed from './components/templates/NewsFeed/NewsFeed';
 
 function App() {
   let { usersStore } = useAppContext();
@@ -21,11 +22,7 @@ function App() {
           header={<Header />}
           body={
             <Switch>
-              <Route
-                exact={true}
-                path={'/'}
-                render={() => <React.Fragment />}
-              />
+              <Route exact={true} path={'/'} render={() => <NewsFeed />} />
               <Route
                 exact={true}
                 path={'/:username'}

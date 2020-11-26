@@ -8,21 +8,19 @@ import Spacing from '../../atoms/Spacing/Spacing';
 import Text from '../../atoms/Text/Text';
 import { observer } from 'mobx-react';
 
-// import './UserProfile.css';
-
 function UserProfile(props) {
   let { postsStore } = useAppContext();
   let _posts = !postsStore.posts ? '0' : Object.keys(postsStore.posts).length;
 
   return (
     <Align align={'start'}>
-      <Row spacing={{ lg: 50, xs: 20 }}>
+      <Row spacing={{ lg: 50, xs: 20 }} verticalAlign={'middle'}>
         <Image
+          src={'https://www.flaticon.com/svg/static/icons/svg/1738/1738691.svg'}
           style={{
             lg: { height: '150px', width: '150px' },
             xs: { height: '85px', width: '85px' },
           }}
-          src={'https://www.flaticon.com/svg/static/icons/svg/1738/1738691.svg'}
         />
         <Container>
           <Text text={props.user.username} level={{ lg: 'h4', xs: 'h5' }} />
