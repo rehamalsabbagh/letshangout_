@@ -2,19 +2,12 @@ import React, { useCallback, useState } from 'react';
 import firebase from '@firebase/app';
 import '@firebase/storage';
 import { useDropzone } from 'react-dropzone';
+import Container from '../../atoms/Container/Container';
+import Text from '../../atoms/Text/Text';
+import './UploadImage.css';
 
-let containerStyle = {
-  background: '#dadada',
-  width: 250,
-  height: 250,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  padding: 50,
-  textAlign: 'center',
-};
-function UploadImage() {
-  const [imageUrl, setImageUrl] = useState({});
+function UploadImage(props) {
+  const [imageUrl, setImageUrl] = useState(null);
   const onDrop = useCallback(async (acceptedFiles) => {
     const file = acceptedFiles?.[0];
     if (!file) {
@@ -22,32 +15,48 @@ function UploadImage() {
     }
     try {
       let url = await uploadFromBlobAsync({
-        blobUrl: URL.createObjectURL(file),
+        directory: props.directory ? props.directory : '',
+        url: URL.createObjectURL(file),
         name: `${file.name}_${Date.now()}`,
       });
-      setImageUrl({ backgroundImage: 'url(' + url + ')' });
+      props.onUpload(url);
+      setImageUrl(url);
     } catch (e) {}
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   return (
-    <div style={{ ...containerStyle, ...imageUrl }} {...getRootProps()}>
-      <input {...getInputProps()} />
-      {isDragActive ? (
-        <p>Drop the files here ...</p>
-      ) : (
-        <p>Drag 'n' drop some files here, or click to select files</p>
+    <Container
+      className={'lho_upload_image'}
+      style={{
+        ...props.style,
+        ...{ backgroundImage: 'url(' + imageUrl + ')' },
+      }}
+      {...getRootProps()}
+    >
+      <input {...getInputProps()} accept={'image/x-png,image/gif,image/jpeg'} />
+      {!imageUrl && (
+        <React.Fragment>
+          {isDragActive ? (
+            <Text text={'Drop the image here'} style={{ cursor: 'pointer' }} />
+          ) : (
+            <Text
+              text={'Drop the image here, or click to select a image'}
+              style={{ cursor: 'pointer' }}
+            />
+          )}
+        </React.Fragment>
       )}
-    </div>
+    </Container>
   );
 }
 export default UploadImage;
-async function uploadFromBlobAsync({ blobUrl, name }) {
-  if (!blobUrl || !name) return null;
+async function uploadFromBlobAsync({ directory, url, name }) {
+  if (!url || !name) return null;
   try {
-    const blob = await fetch(blobUrl).then((r) => r.blob());
+    const blob = await fetch(url).then((r) => r.blob());
     const snapshot = await firebase
       .storage()
-      .ref('/avatar')
+      .ref('/' + directory)
       .child(name)
       .put(blob);
     return await snapshot.ref.getDownloadURL();

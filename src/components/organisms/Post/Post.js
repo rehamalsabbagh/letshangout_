@@ -69,14 +69,7 @@ function Post(props) {
             </Row>
           )
         }
-        // {/* props.image */}
-        image={
-          <Image
-            src={
-              'https://shahpourpouyan.com/wp-content/uploads/2018/10/orionthemes-placeholder-image-1.png'
-            }
-          />
-        }
+        image={<Image src={props.image} />}
       >
         <Row spacing={7}>
           <Icon

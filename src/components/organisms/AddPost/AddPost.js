@@ -8,6 +8,7 @@ import Popup from '../../atoms/Popup/Popup';
 import PopupStore from '../../atoms/Popup/PopupStore';
 import Form from '../Form/Form';
 import './AddPost.css';
+import UploadImage from '../UploadImage/UploadImage';
 const popupStore = new PopupStore();
 
 let addpost_btn_icon_src =
@@ -29,13 +30,9 @@ function AddPost() {
           <Form
             errorMessages={postsStore.errorMessages}
             fields={[
-              <Input
+              <UploadImage
                 error={postsStore.post.image.error}
-                value={postsStore.post.image.value}
-                type={'file'}
-                style={{ height: '200px' }}
-                accept={'image/x-png,image/gif,image/jpeg'}
-                onChange={(e) => postsStore.onChange('image', e.target.value)}
+                onUpload={(url) => postsStore.onChange('image', url)}
               />,
               <Input
                 maxLength={25}
