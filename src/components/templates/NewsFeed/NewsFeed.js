@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAppContext } from '../../../context';
 import Center from '../../atoms/Center/Center';
 import Container from '../../atoms/Container/Container';
@@ -9,13 +9,41 @@ import Text from '../../atoms/Text/Text';
 import PopupStore from '../../atoms/Popup/PopupStore';
 import Popup from '../../atoms/Popup/Popup';
 import SearchAccounts from '../SearchAccounts/SearchAccounts';
+import { observer } from 'mobx-react';
 import './NewsFeed.css';
+import Post from '../../organisms/Post/Post';
 
 const popupStore = new PopupStore();
 const search_icon_src =
   'https://www.flaticon.com/svg/static/icons/svg/975/975658.svg';
 function NewsFeed() {
   const { usersStore } = useAppContext();
+  const { postsStore } = useAppContext();
+
+  useEffect(() => {
+    postsStore.getAllPosts();
+  }, [postsStore]);
+
+  function posts() {
+    let _posts = [];
+    let _count = 0;
+    for (const key in postsStore.posts) {
+      let _post = postsStore.posts[key];
+      _posts = [
+        ..._posts,
+        ...[
+          <Post
+            {..._post}
+            key={_count}
+            // user={props.user}
+            showHeader={null}
+          ></Post>,
+        ],
+      ];
+      _count++;
+    }
+    return _posts;
+  }
 
   return (
     <React.Fragment>
@@ -47,9 +75,10 @@ function NewsFeed() {
             </Container>
           </React.Fragment>
         )}
+        {usersStore.authUser.following && postsStore.posts && posts()}
       </Container>
     </React.Fragment>
   );
 }
 
-export default NewsFeed;
+export default observer(NewsFeed);

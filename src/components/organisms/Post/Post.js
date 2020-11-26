@@ -8,6 +8,7 @@ import Text from '../../atoms/Text/Text';
 import Spacing from '../../atoms/Spacing/Spacing';
 import { useAppContext } from '../../../context';
 import './Post.css';
+import Align from '../../atoms/Align/Align';
 
 let date_icon_src =
   'https://www.flaticon.com/svg/static/icons/svg/2948/2948239.svg';
@@ -52,55 +53,57 @@ function Post(props) {
   let _userLike = userLike();
 
   return (
-    <Card
-      className={'lho_post'}
-      header={
-        props.showHeader && (
-          <Row spacing={10}>
-            {/* props.user.image */}
-            <Icon
-              src={
-                'https://www.flaticon.com/svg/static/icons/svg/1738/1738691.svg'
-              }
-            />
-            <Text text={props.user.username} />
-          </Row>
-        )
-      }
-      // {/* props.image */}
-      image={
-        <Image
-          src={
-            'https://shahpourpouyan.com/wp-content/uploads/2018/10/orionthemes-placeholder-image-1.png'
-          }
-        />
-      }
-    >
-      <Row spacing={7}>
-        <Icon
-          size={'md'}
-          style={{ cursor: 'pointer' }}
-          src={_userLike ? going_colored_icon_src : going_icon_src}
-          onClick={() =>
-            _userLike
-              ? postsStore.unlikePost(_userLike, props.id, props.user.id)
-              : postsStore.likePost(props.id, props.user.id)
-          }
-        />
-        <Text
-          style={{ fontWeight: 500 }}
-          className={'lho_post_info'}
-          text={_likes + ' likes'}
-          level={'span'}
-        />
-      </Row>
-      <Spacing space={10} />
-      {cardInfoText(props.name, null, true)}
-      <Spacing space={5} />
-      {cardInfoText(props.date, date_icon_src)}
-      {cardInfoText(props.time, time_icon_src)}
-      {cardInfoText(props.location, location_icon_src)}
-    </Card>
+    <Align align={'start'}>
+      <Card
+        className={'lho_post'}
+        header={
+          props.showHeader && (
+            <Row spacing={10}>
+              {/* props.user.image */}
+              <Icon
+                src={
+                  'https://www.flaticon.com/svg/static/icons/svg/1738/1738691.svg'
+                }
+              />
+              <Text text={props.user.username} />
+            </Row>
+          )
+        }
+        // {/* props.image */}
+        image={
+          <Image
+            src={
+              'https://shahpourpouyan.com/wp-content/uploads/2018/10/orionthemes-placeholder-image-1.png'
+            }
+          />
+        }
+      >
+        <Row spacing={7}>
+          <Icon
+            size={'md'}
+            style={{ cursor: 'pointer' }}
+            src={_userLike ? going_colored_icon_src : going_icon_src}
+            onClick={() =>
+              _userLike
+                ? postsStore.unlikePost(_userLike, props.id, props.user.id)
+                : postsStore.likePost(props.id, props.user.id)
+            }
+          />
+          <Text
+            style={{ fontWeight: 500 }}
+            className={'lho_post_info'}
+            text={_likes + ' likes'}
+            level={'span'}
+          />
+        </Row>
+        <Spacing space={10} />
+        {cardInfoText(props.name, null, true)}
+        <Spacing space={5} />
+        {cardInfoText(props.date, date_icon_src)}
+        {cardInfoText(props.time, time_icon_src)}
+        {cardInfoText(props.location, location_icon_src)}
+      </Card>
+    </Align>
   );
 }
 

@@ -26,9 +26,7 @@ function UploadImage() {
         name: `${file.name}_${Date.now()}`,
       });
       setImageUrl({ backgroundImage: 'url(' + url + ')' });
-    } catch (e) {
-      // console.log(e);
-    }
+    } catch (e) {}
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   return (

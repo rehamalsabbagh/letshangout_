@@ -57,13 +57,26 @@ class PostsStore {
         );
   }
 
-  getUserPosts(userId) {
+  getAllPosts() {
+    let _following = this.usersStore.authUser.following;
+    let _count = 0;
+    for (const key in _following) {
+      setTimeout(() => {
+        this.getUserPosts(_following[key].user, _count === 0 ? false : true);
+        _count++;
+      }, 500);
+    }
+  }
+
+  getUserPosts(userId, connect) {
     let _this = this;
     firebase
       .database()
       .ref('/posts/' + userId)
       .on('value', (snapshot) => {
-        _this.posts = snapshot.val();
+        if (connect) _this.posts = { ..._this.posts, ...snapshot.val() };
+        if (!connect) _this.posts = [];
+        if (!connect) _this.posts = snapshot.val();
       });
   }
 
