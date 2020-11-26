@@ -6,13 +6,15 @@ import Spacing from '../Spacing/Spacing';
 
 function Component(props) {
   return (
-    <Container style={{ lg: { backgroundColor: '#f7f7f7', borderRaduis: '4px' } }}>
+    <Container
+      style={{ lg: { backgroundColor: '#f7f7f7', borderRaduis: '4px' } }}
+    >
       <Spacing space={{ lg: 10 }} />
       <Text text={props.name} />
       <Spacing space={{ lg: 10 }} />
-      <Input placeHolder={'space'} />
+      <Input placeholder={'space'} />
       <Spacing space={{ lg: 10 }} />
-      <Input placeHolder={'portitions'} />
+      <Input placeholder={'portitions'} />
       <Spacing space={{ lg: 10 }} />
     </Container>
   );

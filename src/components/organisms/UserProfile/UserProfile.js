@@ -11,7 +11,10 @@ import { observer } from 'mobx-react';
 function UserProfile(props) {
   let { postsStore } = useAppContext();
   let _posts = !postsStore.posts ? '0' : Object.keys(postsStore.posts).length;
-
+  let _profileInfoProps = {
+    style: { xs: { fontSize: '0.86rem' } },
+    level: { xs: 'span' },
+  };
   return (
     <Align align={'start'}>
       <Row spacing={{ lg: 50, xs: 20 }} verticalAlign={'middle'}>
@@ -19,17 +22,17 @@ function UserProfile(props) {
           src={'https://www.flaticon.com/svg/static/icons/svg/1738/1738691.svg'}
           style={{
             lg: { height: '150px', width: '150px' },
-            xs: { height: '85px', width: '85px' },
+            xs: { height: '80px', width: '80px' },
           }}
         />
         <Container>
           <Text text={props.user.username} level={{ lg: 'h4', xs: 'h5' }} />
-          <Spacing space={15} />
-          <Row spacing={50}>
-            <Text text={_posts + ' posts'} />
-            <Text text={'0 followers'} />
+          <Spacing space={{ lg: 15, xs: 10 }} />
+          <Row spacing={{ lg: 50, xs: 13 }}>
+            <Text text={_posts + ' posts'} {..._profileInfoProps} />
+            <Text text={'0 followers'} {..._profileInfoProps} />
           </Row>
-          <Spacing space={15} />
+          <Spacing space={{ lg: 15, xs: 10 }} />
         </Container>
       </Row>
     </Align>

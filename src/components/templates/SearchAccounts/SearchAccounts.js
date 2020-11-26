@@ -52,7 +52,7 @@ function SearchAccounts(props) {
     <Card>
       <Align align={'start'}>
         <Input
-          placeHolder={'Search account'}
+          placeholder={'Search account'}
           onChange={(e) => filterUsers(e.target.value)}
         />
         <Spacing space={17} />
