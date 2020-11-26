@@ -18,9 +18,6 @@ function UserProfile(props) {
   let _following = !_user.following ? '0' : Object.keys(_user.following).length;
   let _followingId = followingId();
   let _followerId = followerId();
-  // console.log(_followingId);
-  // console.log(_followerId);
-
   let _profileInfoProps = {
     style: { xs: { fontSize: '0.8rem' } },
     level: { xs: 'span' },
