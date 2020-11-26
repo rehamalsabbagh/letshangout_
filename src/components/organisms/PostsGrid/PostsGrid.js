@@ -41,7 +41,7 @@ function PostsGrid(props) {
           }}
           spacing={{ lg: 20, xs: 0 }}
         >
-          {_posts}
+          {_posts.reverse()}
         </Row>
       </Align>
     );
