@@ -7,10 +7,9 @@ import SignUpIn from './components/organisms/SignUpIn/SignUpIn';
 import { useAppContext } from './context';
 import CentralPage from './components/templates/CentralPage/CentralPage';
 import { Switch, Route, withRouter } from 'react-router-dom';
-
-import './App.css';
 import UserPage from './components/templates/UserPage/UserPage';
 import NewsFeed from './components/templates/NewsFeed/NewsFeed';
+import './App.css';
 
 function App() {
   let { usersStore } = useAppContext();

@@ -24,11 +24,12 @@ function UserProfile(props) {
         />
         <Container>
           <Text text={props.user.username} level={{ lg: 'h4', xs: 'h5' }} />
-          <Spacing space={20} />
+          <Spacing space={15} />
           <Row spacing={50}>
             <Text text={_posts + ' posts'} />
             <Text text={'0 followers'} />
           </Row>
+          <Spacing space={15} />
         </Container>
       </Row>
     </Align>
