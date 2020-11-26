@@ -23,7 +23,6 @@ function SearchAccounts(props) {
       if (usersStore.users[key].username.indexOf(string) > -1)
         _filteredUsers.push({ ...usersStore.users[key], ...{ id: key } });
     }
-    console.log(_filteredUsers);
     setFilteredUsers(_filteredUsers);
   }
 
@@ -32,7 +31,6 @@ function SearchAccounts(props) {
       padding: '10px 0px',
       borderTop: key === 0 ? '' : '1px solid #f7f7f7',
     };
-    console.log(text);
     return (
       <Container key={key} style={_listItemStyle}>
         <Row spacing={10} verticalAlign={'middle'}>

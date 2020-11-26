@@ -38,6 +38,7 @@ function AddPost() {
                 onChange={(e) => postsStore.onChange('image', e.target.value)}
               />,
               <Input
+                maxLength={25}
                 error={postsStore.post.name.error}
                 value={postsStore.post.name.value}
                 placeholder={'Event Name'}
@@ -58,6 +59,7 @@ function AddPost() {
                 onChange={(e) => postsStore.onChange('time', e.target.value)}
               />,
               <Input
+                maxLength={25}
                 error={postsStore.post.location.error}
                 value={postsStore.post.location.value}
                 placeholder={'Location'}

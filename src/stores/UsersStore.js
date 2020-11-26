@@ -18,17 +18,55 @@ class UsersStore {
     return _user;
   }
 
+  getUserPosts(userId) {
+    let _this = this;
+    firebase
+      .database()
+      .ref('/posts/' + userId)
+      .on('value', (snapshot) => {
+        _this.posts = snapshot.val();
+      });
+  }
+
   getUsers() {
     let _this = this;
     firebase
       .database()
-      .ref()
-      .once('value')
-      .then(function (snapshot) {
-        if (snapshot.val() && snapshot.val().users) {
-          _this.users = snapshot.val().users;
+      .ref('/users')
+      .on('value', (snapshot) => {
+        if (snapshot.val()) {
+          _this.users = snapshot.val();
+          if (_this.authUser)
+            _this.authUser = this.retriveUser(_this.authUser.username);
         }
       });
+  }
+
+  follow(userId) {
+    firebase
+      .database()
+      .ref('/users/' + this.authUser.id + '/following')
+      .push({
+        user: userId,
+      });
+    firebase
+      .database()
+      .ref('/users/' + userId + '/followers')
+      .push({
+        user: this.authUser.id,
+      });
+  }
+
+  unfollow(userId, followingId, followerId) {
+    let followingRef = firebase
+      .database()
+      .ref('/users/' + this.authUser.id + '/following/' + followingId);
+    followingRef.remove(() => {
+      let followerRef = firebase
+        .database()
+        .ref('/users/' + userId + '/followers/' + followerId);
+      followerRef.remove();
+    });
   }
 }
 decorate(UsersStore, {
