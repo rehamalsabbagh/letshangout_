@@ -32,7 +32,7 @@ class SignInStore {
     this.user = user;
   }
 
-  singOut() {
+  signOut() {
     this.usersStore.authUser = null;
   }
 

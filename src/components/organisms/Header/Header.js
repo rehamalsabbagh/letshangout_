@@ -29,12 +29,14 @@ function Header() {
           </Align>
           <Align align={{ lg: 'end' }}>
             <Row spacing={{ lg: 10 }} verticalAlign={'middle'}>
-              <Icon
-                src={signout_src}
-                size={'md'}
-                style={iconStyle}
-                onClick={() => signInStore.singOut()}
-              />
+              <Link to={'/'}>
+                <Icon
+                  src={signout_src}
+                  size={'md'}
+                  style={iconStyle}
+                  onClick={() => signInStore.signOut()}
+                />
+              </Link>
               <Link to={'/' + usersStore.authUser.username}>
                 <Icon src={account_src} size={'md'} style={iconStyle} />
               </Link>

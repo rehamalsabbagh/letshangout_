@@ -29,7 +29,9 @@ function App() {
               <Route
                 exact={true}
                 path={'/:username'}
-                render={() => <UserPage user={usersStore.authUser} />}
+                render={(props) => (
+                  <UserPage user={usersStore.authUser} {...props} />
+                )}
               />
             </Switch>
           }

@@ -59,13 +59,12 @@ class PostsStore {
 
   getUserPosts(userId) {
     let _this = this;
-    if (_this.posts === null)
-      firebase
-        .database()
-        .ref('/posts/' + userId)
-        .on('value', (snapshot) => {
-          _this.posts = snapshot.val();
-        });
+    firebase
+      .database()
+      .ref('/posts/' + userId)
+      .on('value', (snapshot) => {
+        _this.posts = snapshot.val();
+      });
   }
 
   likePost(postId, userId) {
