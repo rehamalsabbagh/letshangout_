@@ -7,13 +7,14 @@ import Row from '../../atoms/Row/Row';
 import Spacing from '../../atoms/Spacing/Spacing';
 import Text from '../../atoms/Text/Text';
 import PopupStore from '../../atoms/Popup/PopupStore';
-import './NewsFeed.css';
 import Popup from '../../atoms/Popup/Popup';
 import SearchAccounts from '../SearchAccounts/SearchAccounts';
+import './NewsFeed.css';
+
 const popupStore = new PopupStore();
-let search_icon_src =
+const search_icon_src =
   'https://www.flaticon.com/svg/static/icons/svg/975/975658.svg';
-function NewsFeed(props) {
+function NewsFeed() {
   const { usersStore } = useAppContext();
 
   return (
