@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { observer } from 'mobx-react';
 import { useAppContext } from '../../../context';
 import Row from '../../atoms/Row/Row';
@@ -8,7 +8,10 @@ import Text from '../../atoms/Text/Text';
 
 function PostsGrid(props) {
   let { postsStore } = useAppContext();
-  postsStore.getUserPosts(props.user.id);
+
+  useEffect(() => {
+    postsStore.getUserPosts(props.user.id);
+  }, [postsStore, props.user.id]);
 
   function posts() {
     if (!postsStore.posts) return null;
