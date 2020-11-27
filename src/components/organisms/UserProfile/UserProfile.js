@@ -27,7 +27,7 @@ function UserProfile(props) {
   let _followers = !_user.followers ? '0' : Object.keys(_user.followers).length;
   let _following = !_user.following ? '0' : Object.keys(_user.following).length;
   let _followingId = followId(usersStore.authUser, props.user.id, 'following');
-  let _followerId = followId(props.user.id, usersStore.authUser, 'followers');
+  let _followerId = followId(props.user, usersStore.authUser.id, 'followers');
   let _profileInfoProps = {
     level: { xs: 'span' },
     style: {
