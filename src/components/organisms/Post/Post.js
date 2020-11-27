@@ -109,7 +109,7 @@ function Post(props) {
               text={_likes + ' attendees'}
               level={'span'}
               onClick={() => {
-                if (props.likes) popupStore.setState('open');
+                if (_likes !== '0') popupStore.setState('open');
               }}
             />
           </Row>
