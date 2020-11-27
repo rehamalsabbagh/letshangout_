@@ -54,6 +54,7 @@ class PostsStore {
           },
           () => {
             if (callback) callback();
+            this.clearForm();
           }
         );
   }
