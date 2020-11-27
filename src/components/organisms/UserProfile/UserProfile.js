@@ -45,7 +45,9 @@ function UserProfile(props) {
     <Align align={'start'}>
       <Row spacing={{ lg: 50, xs: 20 }} verticalAlign={'middle'}>
         <Image
-          src={'https://www.flaticon.com/svg/static/icons/svg/1738/1738691.svg'}
+          src={
+            'https://ssl.gstatic.com/images/branding/product/1x/avatar_circle_grey_512dp.png'
+          }
           style={{
             lg: { height: '150px', width: '150px' },
             xs: { height: '80px', width: '80px' },

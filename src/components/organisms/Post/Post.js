@@ -62,7 +62,7 @@ function Post(props) {
               {/* props.user.image */}
               <Icon
                 src={
-                  'https://www.flaticon.com/svg/static/icons/svg/1738/1738691.svg'
+                  'https://ssl.gstatic.com/images/branding/product/1x/avatar_circle_grey_512dp.png'
                 }
               />
               <Text text={props.user.username} />
@@ -71,9 +71,9 @@ function Post(props) {
         }
         image={<Image src={props.image} />}
       >
-        <Row spacing={7}>
+        <Row spacing={7} verticalAlign={'middle'}>
           <Icon
-            size={'md'}
+            size={'xlg'}
             style={{ cursor: 'pointer' }}
             src={_userLike ? going_colored_icon_src : going_icon_src}
             onClick={() =>

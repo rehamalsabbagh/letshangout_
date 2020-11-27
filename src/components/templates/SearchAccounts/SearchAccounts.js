@@ -10,7 +10,7 @@ import Row from '../../atoms/Row/Row';
 import Spacing from '../../atoms/Spacing/Spacing';
 import Text from '../../atoms/Text/Text';
 let account_src =
-  'https://www.flaticon.com/svg/static/icons/svg/1738/1738691.svg';
+  'https://ssl.gstatic.com/images/branding/product/1x/avatar_circle_grey_512dp.png';
 
 function SearchAccounts(props) {
   const { usersStore } = useAppContext();

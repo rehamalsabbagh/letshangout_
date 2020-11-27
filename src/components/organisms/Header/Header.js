@@ -13,7 +13,7 @@ import './Header.css';
 const popupStore = new PopupStore();
 
 const account_src =
-  'https://www.flaticon.com/svg/static/icons/svg/1738/1738691.svg';
+  'https://ssl.gstatic.com/images/branding/product/1x/avatar_circle_grey_512dp.png';
 const signout_src =
   'https://www.flaticon.com/svg/static/icons/svg/251/251376.svg';
 

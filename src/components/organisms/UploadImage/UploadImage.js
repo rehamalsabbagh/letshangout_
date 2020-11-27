@@ -30,7 +30,7 @@ function UploadImage(props) {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   return (
     <Container
-      className={'lho_upload_image' + ' lho_error_' + props.error}
+      className={'lho_upload_image lho_error_' + props.error}
       style={{
         ...props.style,
         ...{ backgroundImage: 'url(' + imageUrl + ')' },
@@ -53,6 +53,7 @@ function UploadImage(props) {
     </Container>
   );
 }
+
 export default UploadImage;
 async function uploadFromBlobAsync({ directory, url, name }) {
   if (!url || !name) return null;

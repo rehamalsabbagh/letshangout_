@@ -33,6 +33,7 @@ function AddPost() {
               <UploadImage
                 error={postsStore.post.image.error}
                 onUpload={(url) => postsStore.onChange('image', url)}
+                directory={'/posts/' + usersStore.authUser.id}
               />,
               <Input
                 maxLength={25}
