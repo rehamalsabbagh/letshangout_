@@ -34,7 +34,7 @@ function Header() {
         <Container className={'page_container'}>
           <Row portitions={{ lg: [0.5, 0.5] }} verticalAlign={'middle'}>
             <Align align={{ lg: 'start' }}>
-              <Link to={'/letshangout_'}>
+              <Link to={'/'}>
                 <TextLogo text={'Letshangout'} />
               </Link>
             </Align>
@@ -46,7 +46,7 @@ function Header() {
                   style={iconStyle}
                   onClick={() => popupStore.setState('open')}
                 />
-                <Link to={'/letshangout_'}>
+                <Link to={'/'}>
                   <Icon
                     src={signout_src}
                     size={'md'}
@@ -54,7 +54,7 @@ function Header() {
                     onClick={() => signInStore.signOut()}
                   />
                 </Link>
-                <Link to={'/letshangout_/' + usersStore.authUser.username}>
+                <Link to={'/' + usersStore.authUser.username}>
                   <Icon
                     src={userImage}
                     size={'lg'}

@@ -12,7 +12,7 @@ function ListItem(props) {
   };
 
   return (
-    <Link to={'/letshangout_' + props.link} onClick={props.onClick}>
+    <Link to={props.link} onClick={props.onClick}>
       <Container style={_listItemStyle}>
         <Row spacing={10} verticalAlign={'middle'}>
           <Icon

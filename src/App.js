@@ -21,14 +21,10 @@ function App() {
           header={<Header />}
           body={
             <Switch>
+              <Route exact={true} path={'/'} render={() => <NewsFeed />} />
               <Route
                 exact={true}
-                path={'/letshangout_'}
-                render={() => <NewsFeed />}
-              />
-              <Route
-                exact={true}
-                path={'/letshangout_/:username'}
+                path={'/:username'}
                 render={(props) => (
                   <UserPage user={usersStore.authUser} {...props} />
                 )}

@@ -67,7 +67,7 @@ function Post(props) {
           className={'lho_post'}
           header={
             props.showHeader && (
-              <Link to={'/letshangout_/' + props.user.username}>
+              <Link to={'/' + props.user.username}>
                 <Row spacing={10} verticalAlign={'middle'}>
                   <Icon
                     size={'xlg'}
