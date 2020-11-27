@@ -2,6 +2,7 @@ import { decorate, observable } from 'mobx';
 import firebase from 'firebase';
 import FormUtil from './utils/FormUtil';
 import { DEFAULT_FIELD_VALUE } from './constants/FormConstants';
+const database = firebase.database();
 const empty_err_msg = 'The highlighted fields are requirerd';
 const match_err_msg = 'Passwords do not match';
 const user_exist_err_msg = 'This username is already registered';
@@ -83,7 +84,7 @@ class SignUpStore {
   }
 
   addUser() {
-    firebase.database().ref('/users').push({
+    database.ref('/users').push({
       username: this.user.username.value,
       password: this.user.password.value,
       email: this.user.email.value,

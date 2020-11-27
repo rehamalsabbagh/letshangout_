@@ -2,6 +2,7 @@ import { decorate, observable } from 'mobx';
 import firebase from 'firebase';
 import { DEFAULT_FIELD_VALUE } from './constants/FormConstants';
 import FormUtil from './utils/FormUtil';
+const database = firebase.database();
 const empty_err_msg = 'The highlighted fields are requirerd';
 class PostsStore {
   constructor(usersStore) {
@@ -40,23 +41,20 @@ class PostsStore {
     let _isAllFilled = FormUtil.isAllFilled(this.post);
     if (!_isAllFilled) this.addErrorMessage(empty_err_msg);
     if (_isAllFilled)
-      firebase
-        .database()
-        .ref('/posts/' + userId)
-        .push(
-          {
-            image: this.post.image.value,
-            name: this.post.name.value,
-            date: this.post.date.value,
-            time: this.post.time.value,
-            location: this.post.location.value,
-            user: userId,
-          },
-          () => {
-            if (callback) callback();
-            this.clearForm();
-          }
-        );
+      database.ref('/posts/' + userId).push(
+        {
+          image: this.post.image.value,
+          name: this.post.name.value,
+          date: this.post.date.value,
+          time: this.post.time.value,
+          location: this.post.location.value,
+          user: userId,
+        },
+        () => {
+          if (callback) callback();
+          this.clearForm();
+        }
+      );
   }
 
   getAllPosts() {
@@ -72,15 +70,12 @@ class PostsStore {
 
   getUserPosts(userId, connect) {
     let _this = this;
-    firebase
-      .database()
-      .ref('/posts/' + userId)
-      .on('value', (snapshot) => {
-        let _snapshotValue = this.mergeWithIds(snapshot.val());
-        if (connect) _this.posts = { ..._this.posts, ..._snapshotValue };
-        if (!connect) _this.posts = null;
-        if (!connect) _this.posts = _snapshotValue;
-      });
+    database.ref('/posts/' + userId).on('value', (snapshot) => {
+      let _snapshotValue = this.mergeWithIds(snapshot.val());
+      if (connect) _this.posts = { ..._this.posts, ..._snapshotValue };
+      if (!connect) _this.posts = null;
+      if (!connect) _this.posts = _snapshotValue;
+    });
   }
 
   mergeWithIds(posts) {
@@ -98,18 +93,15 @@ class PostsStore {
   }
 
   likePost(postId, userId) {
-    firebase
-      .database()
-      .ref('/posts/' + userId + '/' + postId + '/likes')
-      .push({
-        user: this.usersStore.authUser.id,
-      });
+    database.ref('/posts/' + userId + '/' + postId + '/likes').push({
+      user: this.usersStore.authUser.id,
+    });
   }
 
   unlikePost(likeId, postId, userId) {
-    let likeRef = firebase
-      .database()
-      .ref('/posts/' + userId + '/' + postId + '/likes/' + likeId);
+    let likeRef = database.ref(
+      '/posts/' + userId + '/' + postId + '/likes/' + likeId
+    );
     likeRef.remove();
   }
 }
