@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Input from '../../atoms/Input/Input';
 import Spacing from '../../atoms/Spacing/Spacing';
 import Button from '../../atoms/Button/Button';
@@ -6,6 +6,7 @@ import { observer } from 'mobx-react';
 import { useAppContext } from '../../../context/index.js';
 
 function SignUp() {
+  const [loading, setLoading] = useState(false);
   const { signUpStore } = useAppContext();
   const { signInStore } = useAppContext();
 
@@ -45,11 +46,13 @@ function SignUp() {
       />
       {fields_spacing}
       <Button
-        text={{ text: 'Sign Up' }}
+        text={{ text: loading ? 'Loading ...' : 'Sign Up' }}
         onClick={() => {
+          setLoading(true);
           signUpStore.singUp(() => {
             signInStore.setUser(signUpStore.user);
             signInStore.singIn();
+            setLoading(false);
           });
         }}
       />
