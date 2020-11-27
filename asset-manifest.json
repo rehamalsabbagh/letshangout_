@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/static/css/main.8bc4da1f.chunk.css",
-    "main.js": "/static/js/main.c90bfc47.chunk.js",
-    "main.js.map": "/static/js/main.c90bfc47.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.791ff116.js",
-    "runtime-main.js.map": "/static/js/runtime-main.791ff116.js.map",
-    "static/js/2.01120204.chunk.js": "/static/js/2.01120204.chunk.js",
-    "static/js/2.01120204.chunk.js.map": "/static/js/2.01120204.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.a31e5ab64fedf76539ea8b40565941ad.js": "/precache-manifest.a31e5ab64fedf76539ea8b40565941ad.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/main.8bc4da1f.chunk.css.map": "/static/css/main.8bc4da1f.chunk.css.map",
-    "static/js/2.01120204.chunk.js.LICENSE": "/static/js/2.01120204.chunk.js.LICENSE"
+    "main.css": "/letshangout_/static/css/main.8bc4da1f.chunk.css",
+    "main.js": "/letshangout_/static/js/main.dbccfade.chunk.js",
+    "main.js.map": "/letshangout_/static/js/main.dbccfade.chunk.js.map",
+    "runtime-main.js": "/letshangout_/static/js/runtime-main.627e018f.js",
+    "runtime-main.js.map": "/letshangout_/static/js/runtime-main.627e018f.js.map",
+    "static/js/2.366a11f8.chunk.js": "/letshangout_/static/js/2.366a11f8.chunk.js",
+    "static/js/2.366a11f8.chunk.js.map": "/letshangout_/static/js/2.366a11f8.chunk.js.map",
+    "index.html": "/letshangout_/index.html",
+    "precache-manifest.9138a0dd50c3e70f168d1802e7101452.js": "/letshangout_/precache-manifest.9138a0dd50c3e70f168d1802e7101452.js",
+    "service-worker.js": "/letshangout_/service-worker.js",
+    "static/css/main.8bc4da1f.chunk.css.map": "/letshangout_/static/css/main.8bc4da1f.chunk.css.map",
+    "static/js/2.366a11f8.chunk.js.LICENSE": "/letshangout_/static/js/2.366a11f8.chunk.js.LICENSE"
   },
   "entrypoints": [
-    "static/js/runtime-main.791ff116.js",
-    "static/js/2.01120204.chunk.js",
+    "static/js/runtime-main.627e018f.js",
+    "static/js/2.366a11f8.chunk.js",
     "static/css/main.8bc4da1f.chunk.css",
-    "static/js/main.c90bfc47.chunk.js"
+    "static/js/main.dbccfade.chunk.js"
   ]
 }
