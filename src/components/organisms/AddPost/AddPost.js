@@ -39,7 +39,7 @@ function AddPost() {
                 maxLength={25}
                 error={postsStore.post.name.error}
                 value={postsStore.post.name.value}
-                placeholder={'Event Name'}
+                placeholder={'Hangout name'}
                 onChange={(e) => postsStore.onChange('name', e.target.value)}
               />,
               <Input

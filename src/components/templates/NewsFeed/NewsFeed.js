@@ -13,9 +13,14 @@ import { observer } from 'mobx-react';
 import './NewsFeed.css';
 import Post from '../../organisms/Post/Post';
 
+const no_following_msg1 = 'You are not following any account';
+const no_following_msg2 = 'Follow your friends and check their hangouts!';
+const no_posts_msg1 = 'Your friends did not post any hangouts yet';
+const no_posts_msg2 = 'Check other friends accounts';
 const popupStore = new PopupStore();
 const search_icon_src =
   'https://www.flaticon.com/svg/static/icons/svg/975/975658.svg';
+
 function NewsFeed() {
   const { usersStore } = useAppContext();
   const { postsStore } = useAppContext();
@@ -48,6 +53,32 @@ function NewsFeed() {
     return _posts.reverse();
   }
 
+  function emptyFeedMessage(message1, message2) {
+    return (
+      <React.Fragment>
+        <Container style={{ height: 'calc(100vh - 300px)' }}>
+          <Center>
+            <Text text={message1} level={'h5'} />
+            <Spacing space={7} />
+            <Text text={message2} />
+            <Spacing space={15} />
+            <Row
+              spacing={10}
+              verticalAlign={'middle'}
+              onClick={() => popupStore.setState('open')}
+            >
+              <Text
+                text={'Search accounts'}
+                className={'lho_newsfeed_search'}
+              />
+              <Icon src={search_icon_src} size={'lg'} />
+            </Row>
+          </Center>
+        </Container>
+      </React.Fragment>
+    );
+  }
+
   return (
     <React.Fragment>
       <Popup popupStore={popupStore}>
@@ -56,29 +87,9 @@ function NewsFeed() {
         </Container>
       </Popup>
       <Container className={'lho_newsfeed'}>
-        {!usersStore.authUser.following && (
-          <React.Fragment>
-            <Container style={{ height: 'calc(100vh - 300px)' }}>
-              <Center>
-                <Text text={'You are not following any account'} level={'h5'} />
-                <Text text={'Follow your friends and check their hangouts!'} />
-                <Spacing space={15} />
-                <Row
-                  spacing={10}
-                  verticalAlign={'middle'}
-                  onClick={() => popupStore.setState('open')}
-                >
-                  <Text
-                    text={'Search accounts'}
-                    className={'lho_newsfeed_search'}
-                  />
-                  <Icon src={search_icon_src} size={'lg'} />
-                </Row>
-              </Center>
-            </Container>
-          </React.Fragment>
-        )}
-
+        {!usersStore.authUser.following &&
+          emptyFeedMessage(no_following_msg1, no_following_msg2)}
+        {!postsStore.posts && emptyFeedMessage(no_posts_msg1, no_posts_msg2)}
         {usersStore.authUser.following && postsStore.posts && (
           <Container style={_newsFeedStyle}>{posts()}</Container>
         )}

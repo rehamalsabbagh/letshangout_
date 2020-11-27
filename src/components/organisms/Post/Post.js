@@ -78,7 +78,7 @@ function Post(props) {
           props.grid ? (
             <Container
               style={{
-                height: '230px',
+                height: '270px',
                 backgroundImage: 'url(' + props.image + ')',
               }}
             />

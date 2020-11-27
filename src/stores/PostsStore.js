@@ -72,9 +72,11 @@ class PostsStore {
     let _this = this;
     database.ref('/posts/' + userId).on('value', (snapshot) => {
       let _snapshotValue = this.mergeWithIds(snapshot.val());
-      if (connect) _this.posts = { ..._this.posts, ..._snapshotValue };
       if (!connect) _this.posts = null;
       if (!connect) _this.posts = _snapshotValue;
+      if (connect) _this.posts = { ..._this.posts, ..._snapshotValue };
+      if (_this.posts && Object.keys(_this.posts).length === 0)
+        _this.posts = null;
     });
   }
 

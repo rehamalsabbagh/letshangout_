@@ -22,7 +22,7 @@ function SignUp() {
       <Input
         error={signUpStore.user.email.error}
         value={signUpStore.user.email.value}
-        placeholder={'Email Adress'}
+        placeholder={'Email adress'}
         onChange={(e) => signUpStore.onChange('email', e.target.value)}
       />
       {fields_spacing}
@@ -37,7 +37,7 @@ function SignUp() {
       <Input
         error={signUpStore.user.confirmPassword.error}
         value={signUpStore.user.confirmPassword.value}
-        placeholder={'Confirm Password'}
+        placeholder={'Confirm password'}
         type={'password'}
         onChange={(e) =>
           signUpStore.onChange('confirmPassword', e.target.value)

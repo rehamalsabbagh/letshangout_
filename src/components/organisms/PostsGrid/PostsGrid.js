@@ -5,6 +5,8 @@ import Row from '../../atoms/Row/Row';
 import Post from '../Post/Post';
 import Text from '../../atoms/Text/Text';
 import Align from '../../atoms/Align/Align';
+import Spacing from '../../atoms/Spacing/Spacing';
+import Container from '../../atoms/Container/Container';
 
 function PostsGrid(props) {
   let { postsStore } = useAppContext();
@@ -23,13 +25,16 @@ function PostsGrid(props) {
       _posts = [
         ..._posts,
         ...[
-          <Post
-            {..._post}
-            key={_count}
-            user={props.user}
-            showHeader={null}
-            grid={1}
-          ></Post>,
+          <Container>
+            <Post
+              {..._post}
+              key={_count}
+              user={props.user}
+              showHeader={null}
+              grid={1}
+            ></Post>
+            {_count !== 0 && <Spacing space={{ lg: 0, xs: 30 }} />}
+          </Container>,
         ],
       ];
     }
