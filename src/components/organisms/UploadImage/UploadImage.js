@@ -8,25 +8,29 @@ import './UploadImage.css';
 
 function UploadImage(props) {
   const [imageUrl, setImageUrl] = useState(null);
-  const onDrop = useCallback(async (acceptedFiles) => {
-    const file = acceptedFiles?.[0];
-    if (!file) {
-      return;
-    }
-    try {
-      let url = await uploadFromBlobAsync({
-        directory: props.directory ? props.directory : '',
-        url: URL.createObjectURL(file),
-        name: `${file.name}_${Date.now()}`,
-      });
-      props.onUpload(url);
-      setImageUrl(url);
-    } catch (e) {}
-  }, []);
+  const textStyle = { pointerEvents: 'none' };
+  const onDrop = useCallback(
+    async (acceptedFiles) => {
+      const file = acceptedFiles?.[0];
+      if (!file) {
+        return;
+      }
+      try {
+        let url = await uploadFromBlobAsync({
+          directory: props.directory ? props.directory : '',
+          url: URL.createObjectURL(file),
+          name: `${file.name}_${Date.now()}`,
+        });
+        props.onUpload(url);
+        setImageUrl(url);
+      } catch (e) {}
+    },
+    [props]
+  );
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   return (
     <Container
-      className={'lho_upload_image'}
+      className={'lho_upload_image' + ' lho_error_' + props.error}
       style={{
         ...props.style,
         ...{ backgroundImage: 'url(' + imageUrl + ')' },
@@ -37,11 +41,11 @@ function UploadImage(props) {
       {!imageUrl && (
         <React.Fragment>
           {isDragActive ? (
-            <Text text={'Drop the image here'} style={{ cursor: 'pointer' }} />
+            <Text text={'Drop the image here'} style={textStyle} />
           ) : (
             <Text
               text={'Drop the image here, or click to select a image'}
-              style={{ cursor: 'pointer' }}
+              style={textStyle}
             />
           )}
         </React.Fragment>
