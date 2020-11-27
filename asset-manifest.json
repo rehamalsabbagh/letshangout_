@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/letshangout_/static/css/main.8bc4da1f.chunk.css",
-    "main.js": "/letshangout_/static/js/main.a0a7bc25.chunk.js",
-    "main.js.map": "/letshangout_/static/js/main.a0a7bc25.chunk.js.map",
+    "main.js": "/letshangout_/static/js/main.a872f321.chunk.js",
+    "main.js.map": "/letshangout_/static/js/main.a872f321.chunk.js.map",
     "runtime-main.js": "/letshangout_/static/js/runtime-main.627e018f.js",
     "runtime-main.js.map": "/letshangout_/static/js/runtime-main.627e018f.js.map",
-    "static/js/2.366a11f8.chunk.js": "/letshangout_/static/js/2.366a11f8.chunk.js",
-    "static/js/2.366a11f8.chunk.js.map": "/letshangout_/static/js/2.366a11f8.chunk.js.map",
+    "static/js/2.5ae92d72.chunk.js": "/letshangout_/static/js/2.5ae92d72.chunk.js",
+    "static/js/2.5ae92d72.chunk.js.map": "/letshangout_/static/js/2.5ae92d72.chunk.js.map",
     "index.html": "/letshangout_/index.html",
-    "precache-manifest.bc62e603719879f7511ea504d9808915.js": "/letshangout_/precache-manifest.bc62e603719879f7511ea504d9808915.js",
+    "precache-manifest.d36ba2f6ef6da45407e435005474a8d7.js": "/letshangout_/precache-manifest.d36ba2f6ef6da45407e435005474a8d7.js",
     "service-worker.js": "/letshangout_/service-worker.js",
     "static/css/main.8bc4da1f.chunk.css.map": "/letshangout_/static/css/main.8bc4da1f.chunk.css.map",
-    "static/js/2.366a11f8.chunk.js.LICENSE": "/letshangout_/static/js/2.366a11f8.chunk.js.LICENSE"
+    "static/js/2.5ae92d72.chunk.js.LICENSE": "/letshangout_/static/js/2.5ae92d72.chunk.js.LICENSE"
   },
   "entrypoints": [
     "static/js/runtime-main.627e018f.js",
-    "static/js/2.366a11f8.chunk.js",
+    "static/js/2.5ae92d72.chunk.js",
     "static/css/main.8bc4da1f.chunk.css",
-    "static/js/main.a0a7bc25.chunk.js"
+    "static/js/main.a872f321.chunk.js"
   ]
 }
