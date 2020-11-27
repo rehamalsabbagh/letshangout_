@@ -7,7 +7,6 @@ import TextLogo from '../../atoms/TextLogo/TextLogo';
 import { useAppContext } from '../../../context/AppContext';
 import { Link } from 'react-router-dom';
 import PopupStore from '../../atoms/Popup/PopupStore';
-import Popup from '../../atoms/Popup/Popup';
 import SearchAccounts from '../../templates/SearchAccounts/SearchAccounts';
 import './Header.css';
 const popupStore = new PopupStore();
@@ -29,11 +28,7 @@ function Header() {
 
   return (
     <React.Fragment>
-      <Popup popupStore={popupStore}>
-        <Container className={'page_container'}>
-          <SearchAccounts />
-        </Container>
-      </Popup>
+      <SearchAccounts popupStore={popupStore} />
       <Container className={'lho_header'}>
         <Container className={'page_container'}>
           <Row portitions={{ lg: [0.5, 0.5] }} verticalAlign={'middle'}>

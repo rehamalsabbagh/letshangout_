@@ -1,19 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAppContext } from '../../../context';
 import Align from '../../atoms/Align/Align';
 import Container from '../../atoms/Container/Container';
 import Row from '../../atoms/Row/Row';
 import Spacing from '../../atoms/Spacing/Spacing';
 import Button from '../../atoms/Button/Button';
+import PopupStore from '../../atoms/Popup/PopupStore';
 import Text from '../../atoms/Text/Text';
 import { observer } from 'mobx-react';
 import UploadImage from '../UploadImage/UploadImage';
+import AccountsList from '../../organisms/AccountsList/AccountsList';
 import './UserProfile.css';
+const popupStore = new PopupStore();
 
 const account_src =
   'https://ssl.gstatic.com/images/branding/product/1x/avatar_circle_grey_512dp.png';
 
 function UserProfile(props) {
+  const [usersIds, setUsersIds] = useState({});
   let { postsStore } = useAppContext();
   let { usersStore } = useAppContext();
   let _user = props.user;
@@ -21,29 +25,22 @@ function UserProfile(props) {
   let _posts = !postsStore.posts ? '0' : Object.keys(postsStore.posts).length;
   let _followers = !_user.followers ? '0' : Object.keys(_user.followers).length;
   let _following = !_user.following ? '0' : Object.keys(_user.following).length;
-  let _followingId = followingId();
-  let _followerId = followerId();
+  let _followingId = followId(usersStore.authUser, props.user.id, 'following');
+  let _followerId = followId(props.user.id, usersStore.authUser, 'followers');
   let _profileInfoProps = {
-    style: { xs: { fontSize: '0.8rem' } },
     level: { xs: 'span' },
+    style: {
+      lg: { cursor: 'pointer' },
+      xs: { cursor: 'pointer', fontSize: '0.8rem' },
+    },
   };
 
-  function followingId() {
-    let _followingId = null;
-    for (const key in usersStore.authUser.following) {
-      if (usersStore.authUser.following[key].user === props.user.id)
-        _followingId = key;
+  function followId(searchIn, searchFor, searchKey) {
+    let _followId = null;
+    for (const key in searchIn[searchKey]) {
+      if (searchIn[searchKey][key].user === searchFor) _followId = key;
     }
-    return _followingId;
-  }
-
-  function followerId() {
-    let _followerId = null;
-    for (const key in props.user.followers) {
-      if (props.user.followers[key].user === usersStore.authUser.id)
-        _followerId = key;
-    }
-    return _followerId;
+    return _followId;
   }
 
   function userImage(_isAuthUser, _user) {
@@ -65,34 +62,55 @@ function UserProfile(props) {
     );
   }
 
+  function profileInfoText(count, key, onClick) {
+    return (
+      <Text
+        {..._profileInfoProps}
+        text={count + ' ' + key}
+        onClick={() => {
+          if (onClick) onClick(key);
+        }}
+      />
+    );
+  }
+
+  function showUsers(key) {
+    if (!_user[key]) return;
+    setUsersIds(_user[key]);
+    popupStore.setState('open');
+  }
+
   return (
-    <Align align={'start'}>
-      <Row spacing={{ lg: 50, xs: 20 }} verticalAlign={'middle'}>
-        {userImage(_isAuthUser, _user)}
-        <Container>
-          <Text text={_user.username} level={{ lg: 'h4', xs: 'h5' }} />
-          <Spacing space={{ lg: 15, xs: 10 }} />
-          <Row spacing={{ lg: 50, xs: 13 }}>
-            <Text text={_posts + ' posts'} {..._profileInfoProps} />
-            <Text text={_followers + ' followers'} {..._profileInfoProps} />
-            <Text text={_following + ' following'} {..._profileInfoProps} />
-          </Row>
-          <Spacing space={{ lg: 15, xs: 10 }} />
-          {!_isAuthUser && (
-            <Button
-              text={{ text: _followingId ? 'Unfollow' : 'Follow' }}
-              primaryColor={'#ffffff'}
-              secondaryColor={'#454545'}
-              onClick={() =>
-                _followingId
-                  ? usersStore.unfollow(_user.id, _followingId, _followerId)
-                  : usersStore.follow(_user.id)
-              }
-            />
-          )}
-        </Container>
-      </Row>
-    </Align>
+    <React.Fragment>
+      <AccountsList popupStore={popupStore} usersIds={usersIds} />
+      <Align align={'start'}>
+        <Row spacing={{ lg: 50, xs: 20 }} verticalAlign={'middle'}>
+          {userImage(_isAuthUser, _user)}
+          <Container>
+            <Text text={_user.username} level={{ lg: 'h4', xs: 'h5' }} />
+            <Spacing space={{ lg: 15, xs: 10 }} />
+            <Row spacing={{ lg: 50, xs: 13 }}>
+              {profileInfoText(_posts, 'posts')}
+              {profileInfoText(_followers, 'followers', showUsers)}
+              {profileInfoText(_following, 'following', showUsers)}
+            </Row>
+            <Spacing space={{ lg: 15, xs: 10 }} />
+            {!_isAuthUser && (
+              <Button
+                text={{ text: _followingId ? 'Unfollow' : 'Follow' }}
+                primaryColor={'#ffffff'}
+                secondaryColor={'#454545'}
+                onClick={() =>
+                  _followingId
+                    ? usersStore.unfollow(_user.id, _followingId, _followerId)
+                    : usersStore.follow(_user.id)
+                }
+              />
+            )}
+          </Container>
+        </Row>
+      </Align>
+    </React.Fragment>
   );
 }
 

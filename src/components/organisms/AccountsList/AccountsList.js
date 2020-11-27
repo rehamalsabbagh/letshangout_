@@ -1,43 +1,35 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useAppContext } from '../../../context';
 import Align from '../../atoms/Align/Align';
 import Card from '../../atoms/Card/Card';
 import Container from '../../atoms/Container/Container';
-import Input from '../../atoms/Input/Input';
 import ListItem from '../../atoms/ListItem/ListItem';
 import Popup from '../../atoms/Popup/Popup';
 import ScrollContainer from '../../atoms/ScrollContainer/ScrollContainer';
-import Spacing from '../../atoms/Spacing/Spacing';
 let account_src =
   'https://ssl.gstatic.com/images/branding/product/1x/avatar_circle_grey_512dp.png';
 
-function SearchAccounts(props) {
+function AccountsList(props) {
   const { usersStore } = useAppContext();
-  const [filteredUsers, setFilteredUsers] = useState(null);
-  if (!filteredUsers) filterUsers('');
 
-  function filterUsers(string) {
-    let _filteredUsers = [];
-    for (const key in usersStore.users) {
-      if (usersStore.users[key].username.indexOf(string) > -1)
-        _filteredUsers.push(usersStore.users[key]);
+  function getUsers() {
+    let _users = [];
+    for (const key in props.usersIds) {
+      let _user = usersStore.users[props.usersIds[key].user];
+      if (_user) _users = [..._users, ...[_user]];
     }
-    setFilteredUsers(_filteredUsers);
+    return _users;
   }
 
+  let _users = getUsers();
   return (
     <Popup popupStore={props.popupStore}>
       <Container className={'page_container'}>
         <Card>
           <Align align={'start'}>
-            <Input
-              placeholder={'Search account'}
-              onChange={(e) => filterUsers(e.target.value)}
-            />
-            <Spacing space={17} />
             <ScrollContainer>
-              {filteredUsers &&
-                filteredUsers.map((user, key) => (
+              {_users &&
+                _users.map((user, key) => (
                   <ListItem
                     link={'/' + user.username}
                     key={key}
@@ -55,4 +47,4 @@ function SearchAccounts(props) {
   );
 }
 
-export default SearchAccounts;
+export default AccountsList;

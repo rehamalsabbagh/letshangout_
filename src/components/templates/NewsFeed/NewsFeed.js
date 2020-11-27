@@ -7,7 +7,6 @@ import Row from '../../atoms/Row/Row';
 import Spacing from '../../atoms/Spacing/Spacing';
 import Text from '../../atoms/Text/Text';
 import PopupStore from '../../atoms/Popup/PopupStore';
-import Popup from '../../atoms/Popup/Popup';
 import SearchAccounts from '../SearchAccounts/SearchAccounts';
 import { observer } from 'mobx-react';
 import './NewsFeed.css';
@@ -81,11 +80,7 @@ function NewsFeed() {
 
   return (
     <React.Fragment>
-      <Popup popupStore={popupStore}>
-        <Container className={'page_container'}>
-          <SearchAccounts />
-        </Container>
-      </Popup>
+      <SearchAccounts popupStore={popupStore} />
       <Container className={'lho_newsfeed'}>
         {!usersStore.authUser.following &&
           emptyFeedMessage(no_following_msg1, no_following_msg2)}
