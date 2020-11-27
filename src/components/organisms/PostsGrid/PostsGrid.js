@@ -28,6 +28,7 @@ function PostsGrid(props) {
             key={_count}
             user={props.user}
             showHeader={null}
+            grid={1}
           ></Post>,
         ],
       ];

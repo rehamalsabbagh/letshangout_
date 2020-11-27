@@ -34,7 +34,11 @@ function SearchAccounts(props) {
     return (
       <Container key={key} style={_listItemStyle}>
         <Row spacing={10} verticalAlign={'middle'}>
-          <Icon src={image ? image : account_src} size={'xlg'} />
+          <Icon
+            size={'xlg'}
+            style={{ borderRadius: '500px' }}
+            src={image ? image : account_src}
+          />
           <Text text={text} />
         </Row>
       </Container>

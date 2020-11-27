@@ -16,7 +16,6 @@ const account_src =
   'https://ssl.gstatic.com/images/branding/product/1x/avatar_circle_grey_512dp.png';
 const signout_src =
   'https://www.flaticon.com/svg/static/icons/svg/251/251376.svg';
-
 const search_src =
   'https://www.flaticon.com/svg/static/icons/svg/482/482631.svg';
 
@@ -24,6 +23,9 @@ function Header() {
   const { signInStore } = useAppContext();
   const { usersStore } = useAppContext();
   const iconStyle = { cursor: 'pointer' };
+  const userImage = usersStore.authUser.image
+    ? usersStore.authUser.image
+    : account_src;
 
   return (
     <React.Fragment>
@@ -57,7 +59,11 @@ function Header() {
                   />
                 </Link>
                 <Link to={'/' + usersStore.authUser.username}>
-                  <Icon src={account_src} size={'md'} style={iconStyle} />
+                  <Icon
+                    src={userImage}
+                    size={'lg'}
+                    style={{ ...iconStyle, ...{ borderRadius: '500px' } }}
+                  />
                 </Link>
               </Row>
             </Align>

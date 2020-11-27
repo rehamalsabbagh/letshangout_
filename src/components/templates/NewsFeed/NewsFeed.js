@@ -19,6 +19,7 @@ const search_icon_src =
 function NewsFeed() {
   const { usersStore } = useAppContext();
   const { postsStore } = useAppContext();
+  const _newsFeedStyle = { lg: { padding: '0px 12%' }, xs: { padding: '0px' } };
 
   useEffect(() => {
     postsStore.getAllPosts();
@@ -77,7 +78,10 @@ function NewsFeed() {
             </Container>
           </React.Fragment>
         )}
-        {usersStore.authUser.following && postsStore.posts && posts()}
+
+        {usersStore.authUser.following && postsStore.posts && (
+          <Container style={_newsFeedStyle}>{posts()}</Container>
+        )}
       </Container>
     </React.Fragment>
   );

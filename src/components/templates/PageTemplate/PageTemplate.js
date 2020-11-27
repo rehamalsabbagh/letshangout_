@@ -12,6 +12,7 @@ function PageTemplate(props) {
       <Container className={'lho_page_body page_container'}>
         {props.body}
       </Container>
+      <Spacing space={{ lg: 50, xs: 35 }} />
     </Container>
   );
 }
