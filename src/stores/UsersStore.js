@@ -2,7 +2,7 @@ import { decorate, observable } from 'mobx';
 import config from '../firebase/config';
 import firebase from 'firebase';
 firebase.initializeApp(config);
-
+const database = firebase.database();
 class UsersStore {
   constructor() {
     this.users = {};
@@ -19,26 +19,20 @@ class UsersStore {
 
   getUserPosts(userId) {
     let _this = this;
-    firebase
-      .database()
-      .ref('/posts/' + userId)
-      .on('value', (snapshot) => {
-        _this.posts = snapshot.val();
-      });
+    database.ref('/posts/' + userId).on('value', (snapshot) => {
+      _this.posts = snapshot.val();
+    });
   }
 
   getUsers() {
     let _this = this;
-    firebase
-      .database()
-      .ref('/users')
-      .on('value', (snapshot) => {
-        if (snapshot.val()) {
-          _this.users = this.mergeWithIds(snapshot.val());
-          if (_this.authUser)
-            _this.authUser = this.retriveUser(_this.authUser.username);
-        }
-      });
+    database.ref('/users').on('value', (snapshot) => {
+      if (snapshot.val()) {
+        _this.users = this.mergeWithIds(snapshot.val());
+        if (_this.authUser)
+          _this.authUser = this.retriveUser(_this.authUser.username);
+      }
+    });
   }
 
   mergeWithIds(users) {
@@ -53,30 +47,28 @@ class UsersStore {
   }
 
   follow(userId) {
-    firebase
-      .database()
-      .ref('/users/' + this.authUser.id + '/following')
-      .push({
-        user: userId,
-      });
-    firebase
-      .database()
-      .ref('/users/' + userId + '/followers')
-      .push({
-        user: this.authUser.id,
-      });
+    database.ref('/users/' + this.authUser.id + '/following').push({
+      user: userId,
+    });
+    database.ref('/users/' + userId + '/followers').push({
+      user: this.authUser.id,
+    });
   }
 
   unfollow(userId, followingId, followerId) {
-    let followingRef = firebase
-      .database()
-      .ref('/users/' + this.authUser.id + '/following/' + followingId);
+    let followingRef = database.ref(
+      '/users/' + this.authUser.id + '/following/' + followingId
+    );
     followingRef.remove(() => {
       let followerRef = firebase
         .database()
         .ref('/users/' + userId + '/followers/' + followerId);
       followerRef.remove();
     });
+  }
+
+  setUserImage(image) {
+    database.ref('/users/' + this.authUser.id + '/image').set(image);
   }
 }
 decorate(UsersStore, {

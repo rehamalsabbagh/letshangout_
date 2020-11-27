@@ -7,7 +7,8 @@ import Text from '../../atoms/Text/Text';
 import './UploadImage.css';
 
 function UploadImage(props) {
-  const [imageUrl, setImageUrl] = useState(null);
+  const _backgroundImage = props.style ? props.style.backgroundImage : '';
+  const [imageUrl, setImageUrl] = useState(_backgroundImage);
   const textStyle = { pointerEvents: 'none' };
   const onDrop = useCallback(
     async (acceptedFiles) => {
@@ -22,7 +23,7 @@ function UploadImage(props) {
           name: `${file.name}_${Date.now()}`,
         });
         props.onUpload(url);
-        setImageUrl(url);
+        setImageUrl('url(' + url + ')');
       } catch (e) {}
     },
     [props]
@@ -33,7 +34,7 @@ function UploadImage(props) {
       className={'lho_upload_image lho_error_' + props.error}
       style={{
         ...props.style,
-        ...{ backgroundImage: 'url(' + imageUrl + ')' },
+        ...{ backgroundImage: imageUrl },
       }}
       {...getRootProps()}
     >
