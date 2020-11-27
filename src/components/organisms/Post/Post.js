@@ -108,7 +108,9 @@ function Post(props) {
               className={'lho_post_info'}
               text={_likes + ' attendees'}
               level={'span'}
-              onClick={() => popupStore.setState('open')}
+              onClick={() => {
+                if (props.likes) popupStore.setState('open');
+              }}
             />
           </Row>
           <Spacing space={10} />
