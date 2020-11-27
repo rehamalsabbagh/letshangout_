@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import PopupStore from '../../atoms/Popup/PopupStore';
 import SearchAccounts from '../../templates/SearchAccounts/SearchAccounts';
 import './Header.css';
-const popupStore = new PopupStore();
+import { useVm } from '../../../context';
 
 const account_src =
   'https://ssl.gstatic.com/images/branding/product/1x/avatar_circle_grey_512dp.png';
@@ -21,6 +21,7 @@ const search_src =
 function Header() {
   const { signInStore } = useAppContext();
   const { usersStore } = useAppContext();
+  const popupStore = useVm(PopupStore);
   const iconStyle = { cursor: 'pointer' };
   const userImage = usersStore.authUser.image
     ? usersStore.authUser.image

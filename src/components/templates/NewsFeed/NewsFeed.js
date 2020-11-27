@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useAppContext } from '../../../context';
+import { useAppContext, useVm } from '../../../context';
 import Center from '../../atoms/Center/Center';
 import Container from '../../atoms/Container/Container';
 import Icon from '../../atoms/Icon/Icon';
@@ -16,13 +16,14 @@ const no_following_msg1 = 'You are not following any account';
 const no_following_msg2 = 'Follow your friends and check their hangouts!';
 const no_posts_msg1 = 'Your friends did not post any hangouts yet';
 const no_posts_msg2 = 'Check other friends accounts';
-const popupStore = new PopupStore();
 const search_icon_src =
   'https://www.flaticon.com/svg/static/icons/svg/975/975658.svg';
 
 function NewsFeed() {
   const { usersStore } = useAppContext();
   const { postsStore } = useAppContext();
+  const popupStore = useVm(PopupStore);
+
   const _newsFeedStyle = { lg: { padding: '0px 12%' }, xs: { padding: '0px' } };
 
   useEffect(() => {

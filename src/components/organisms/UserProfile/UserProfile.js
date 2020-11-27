@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useAppContext } from '../../../context';
+import { useAppContext, useVm } from '../../../context';
 import Align from '../../atoms/Align/Align';
 import Container from '../../atoms/Container/Container';
 import Row from '../../atoms/Row/Row';
@@ -11,15 +11,16 @@ import { observer } from 'mobx-react';
 import UploadImage from '../UploadImage/UploadImage';
 import AccountsList from '../../organisms/AccountsList/AccountsList';
 import './UserProfile.css';
-const popupStore = new PopupStore();
 
 const account_src =
   'https://ssl.gstatic.com/images/branding/product/1x/avatar_circle_grey_512dp.png';
 
 function UserProfile(props) {
   const [usersIds, setUsersIds] = useState({});
-  let { postsStore } = useAppContext();
-  let { usersStore } = useAppContext();
+  const { postsStore } = useAppContext();
+  const { usersStore } = useAppContext();
+  const popupStore = useVm(PopupStore);
+
   let _user = props.user;
   let _isAuthUser = usersStore.authUser.username === _user.username;
   let _posts = !postsStore.posts ? '0' : Object.keys(postsStore.posts).length;

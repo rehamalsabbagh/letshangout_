@@ -9,7 +9,7 @@ import PopupStore from '../../atoms/Popup/PopupStore';
 import Form from '../Form/Form';
 import './AddPost.css';
 import UploadImage from '../UploadImage/UploadImage';
-const popupStore = new PopupStore();
+import { useVm } from '../../../context';
 
 let addpost_btn_icon_src =
   'https://www.flaticon.com/svg/static/icons/svg/864/864380.svg';
@@ -17,7 +17,7 @@ let addpost_btn_icon_src =
 function AddPost() {
   const { postsStore } = useAppContext();
   const { usersStore } = useAppContext();
-
+  const popupStore = useVm(PopupStore);
   let addPostBtnIcon = {
     src: addpost_btn_icon_src,
     size: 'lg',

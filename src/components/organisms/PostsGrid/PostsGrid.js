@@ -28,7 +28,7 @@ function PostsGrid(props) {
           <Container>
             <Post
               {..._post}
-              key={_count}
+              key={key}
               user={props.user}
               showHeader={null}
               grid={1}

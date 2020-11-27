@@ -6,11 +6,13 @@ import Row from '../../atoms/Row/Row';
 import Image from '../../atoms/Image/Image';
 import Text from '../../atoms/Text/Text';
 import Spacing from '../../atoms/Spacing/Spacing';
-import { useAppContext } from '../../../context';
+import { useAppContext, useVm } from '../../../context';
 import './Post.css';
 import Align from '../../atoms/Align/Align';
 import { Link } from 'react-router-dom';
 import Container from '../../atoms/Container/Container';
+import AccountsList from '../AccountsList/AccountsList';
+import PopupStore from '../../atoms/Popup/PopupStore';
 
 const account_src =
   'https://ssl.gstatic.com/images/branding/product/1x/avatar_circle_grey_512dp.png';
@@ -27,6 +29,7 @@ const going_colored_icon_src =
 function Post(props) {
   const { postsStore } = useAppContext();
   const { usersStore } = useAppContext();
+  const popupStore = useVm(PopupStore);
   const _userImage = props.user.image ? props.user.image : account_src;
   const _likes = !props.likes ? '0' : Object.keys(props.likes).length;
   const _userLike = userLike();
@@ -57,62 +60,66 @@ function Post(props) {
   }
 
   return (
-    <Align align={'start'}>
-      <Card
-        className={'lho_post'}
-        header={
-          props.showHeader && (
-            <Link to={'/' + props.user.username}>
-              <Row spacing={10} verticalAlign={'middle'}>
-                <Icon
-                  size={'xlg'}
-                  src={_userImage}
-                  style={{ borderRadius: '500px' }}
-                />
-                <Text text={props.user.username} />
-              </Row>
-            </Link>
-          )
-        }
-        image={
-          props.grid ? (
-            <Container
-              style={{
-                height: '270px',
-                backgroundImage: 'url(' + props.image + ')',
-              }}
+    <React.Fragment>
+      <AccountsList popupStore={popupStore} usersIds={props.likes} />
+      <Align align={'start'}>
+        <Card
+          className={'lho_post'}
+          header={
+            props.showHeader && (
+              <Link to={'/' + props.user.username}>
+                <Row spacing={10} verticalAlign={'middle'}>
+                  <Icon
+                    size={'xlg'}
+                    src={_userImage}
+                    style={{ borderRadius: '500px' }}
+                  />
+                  <Text text={props.user.username} />
+                </Row>
+              </Link>
+            )
+          }
+          image={
+            props.grid ? (
+              <Container
+                style={{
+                  height: '270px',
+                  backgroundImage: 'url(' + props.image + ')',
+                }}
+              />
+            ) : (
+              <Image src={props.image} />
+            )
+          }
+        >
+          <Row spacing={7} verticalAlign={'middle'}>
+            <Icon
+              size={'xlg'}
+              style={{ cursor: 'pointer' }}
+              src={_userLike ? going_colored_icon_src : going_icon_src}
+              onClick={() =>
+                _userLike
+                  ? postsStore.unlikePost(_userLike, props.id, props.user.id)
+                  : postsStore.likePost(props.id, props.user.id)
+              }
             />
-          ) : (
-            <Image src={props.image} />
-          )
-        }
-      >
-        <Row spacing={7} verticalAlign={'middle'}>
-          <Icon
-            size={'xlg'}
-            style={{ cursor: 'pointer' }}
-            src={_userLike ? going_colored_icon_src : going_icon_src}
-            onClick={() =>
-              _userLike
-                ? postsStore.unlikePost(_userLike, props.id, props.user.id)
-                : postsStore.likePost(props.id, props.user.id)
-            }
-          />
-          <Text
-            style={{ fontWeight: 500 }}
-            className={'lho_post_info'}
-            text={_likes + ' attendees'}
-            level={'span'}
-          />
-        </Row>
-        <Spacing space={10} />
-        {cardInfoText(props.name, null, true)}
-        <Spacing space={5} />
-        {cardInfoText(props.date, date_icon_src)}
-        {cardInfoText(props.time, time_icon_src)}
-        {cardInfoText(props.location, location_icon_src)}
-      </Card>
-    </Align>
+            <Text
+              style={{ fontWeight: 500, cursor: 'pointer' }}
+              className={'lho_post_info'}
+              text={_likes + ' attendees'}
+              level={'span'}
+              onClick={() => popupStore.setState('open')}
+            />
+          </Row>
+          <Spacing space={10} />
+          {cardInfoText(props.name, null, true)}
+          <Spacing space={5} />
+          {cardInfoText(props.date, date_icon_src)}
+          {cardInfoText(props.time, time_icon_src)}
+          {cardInfoText(props.location, location_icon_src)}
+        </Card>
+      </Align>
+    </React.Fragment>
   );
 }
 
