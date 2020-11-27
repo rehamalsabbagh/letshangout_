@@ -34,16 +34,3 @@
   background-color: #fef3f3 !important;
   border-color: #eadada !important;
 }
-
-input[type='file'] {
-  opacity: 0;
-  z-index: -1;
-  height: 100%;
-  cursor: pointer;
-}
-
-.lho_input_file {
-  background-image: url(https://shahpourpouyan.com/wp-content/uploads/2018/10/orionthemes-placeholder-image-1.png);
-  background-position: center;
-  background-size: cover;
-}

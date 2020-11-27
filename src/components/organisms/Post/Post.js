@@ -17,9 +17,9 @@ let time_icon_src =
 let location_icon_src =
   'https://www.flaticon.com/svg/static/icons/svg/1008/1008001.svg';
 let going_icon_src =
-  'https://www.flaticon.com/svg/static/icons/svg/1216/1216575.svg';
+  'https://www.flaticon.com/svg/static/icons/svg/1612/1612618.svg';
 let going_colored_icon_src =
-  'https://www.flaticon.com/svg/static/icons/svg/1216/1216774.svg';
+  'https://www.flaticon.com/svg/static/icons/svg/1612/1612763.svg';
 function Post(props) {
   let { postsStore } = useAppContext();
   let { usersStore } = useAppContext();
