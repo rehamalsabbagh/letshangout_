@@ -29,26 +29,29 @@ function UploadImage(props) {
     [props]
   );
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const _className =
+    'lho_upload_image lho_error_' + props.error + ' ' + props.className;
+
   return (
     <Container
-      className={'lho_upload_image lho_error_' + props.error}
       style={{
         ...props.style,
         ...{ backgroundImage: imageUrl },
       }}
+      className={_className}
       {...getRootProps()}
     >
       <input {...getInputProps()} accept={'image/x-png,image/gif,image/jpeg'} />
       {!imageUrl && (
         <React.Fragment>
-          {isDragActive ? (
-            <Text text={'Drop the image here'} style={textStyle} />
-          ) : (
-            <Text
-              text={'Drop the image here, or click to select a image'}
-              style={textStyle}
-            />
-          )}
+          <Text
+            style={textStyle}
+            text={
+              isDragActive
+                ? 'Drop the image here'
+                : 'Drop the image here, or click to select a image'
+            }
+          />
         </React.Fragment>
       )}
     </Container>

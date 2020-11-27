@@ -8,7 +8,8 @@ import Button from '../../atoms/Button/Button';
 import Text from '../../atoms/Text/Text';
 import { observer } from 'mobx-react';
 import UploadImage from '../UploadImage/UploadImage';
-import GeneralUtil from '../../utils/GeneralUtil';
+import './UserProfile.css';
+
 const account_src =
   'https://ssl.gstatic.com/images/branding/product/1x/avatar_circle_grey_512dp.png';
 
@@ -46,28 +47,18 @@ function UserProfile(props) {
   }
 
   function userImage(_isAuthUser, _user) {
-    let backgroundUrl = _user.image !== undefined ? _user.image : account_src;
-    let _addStyle = {
-      backgroundImage: 'url(' + backgroundUrl + ')',
+    let _backgroundUrl = _user.image !== undefined ? _user.image : account_src;
+    let _style = {
+      backgroundImage: 'url(' + _backgroundUrl + ')',
       backgroundSize: 'cover',
       borderRadius: '500px',
     };
-    let _style = {
-      lg: {
-        ...{ height: '150px', width: '150px' },
-        ..._addStyle,
-      },
-      xs: {
-        ...{ height: '80px', width: '80px' },
-        ..._addStyle,
-      },
-    };
-    let __style = GeneralUtil.responsiveObj(_style);
     return !_isAuthUser ? (
-      <Container style={__style} />
+      <Container className={'lho_userimage'} style={_style} />
     ) : (
       <UploadImage
-        style={__style}
+        className={'lho_userimage'}
+        style={_style}
         onUpload={(image) => usersStore.setUserImage(image)}
         directory={'/userimage/' + usersStore.authUser.id}
       />

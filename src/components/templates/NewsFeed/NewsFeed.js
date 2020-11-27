@@ -34,18 +34,18 @@ function NewsFeed() {
         ..._posts,
         ...[
           <React.Fragment key={key}>
-            {_count !== 0 && <Spacing space={{ lg: 45, xs: 30 }} />}
             <Post
               {..._post}
               showHeader={1}
               user={usersStore.users[_post.user]}
             ></Post>
+            {_count !== 0 && <Spacing space={{ lg: 45, xs: 30 }} />}
           </React.Fragment>,
         ],
       ];
       _count++;
     }
-    return _posts;
+    return _posts.reverse();
   }
 
   return (
