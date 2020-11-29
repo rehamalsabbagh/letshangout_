@@ -42,7 +42,7 @@ class SignUpStore {
     return this.user.password.value === this.user.confirmPassword.value;
   }
 
-  singUp(signIn) {
+  signUp(signIn) {
     this.clearErrorMessages();
     const _user = this.user.username.value;
     const _pass = this.user.password.value;

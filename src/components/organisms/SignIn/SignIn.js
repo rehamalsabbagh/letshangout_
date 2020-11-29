@@ -28,7 +28,7 @@ function SignIn() {
       <Button
         text={{ text: 'Sign In' }}
         onClick={() => {
-          signInStore.singIn();
+          signInStore.signIn();
         }}
       />
     </React.Fragment>

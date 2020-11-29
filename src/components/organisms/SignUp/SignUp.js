@@ -49,9 +49,9 @@ function SignUp() {
         text={{ text: loading ? 'Loading ...' : 'Sign Up' }}
         onClick={() => {
           setLoading(true);
-          signUpStore.singUp(() => {
+          signUpStore.signUp(() => {
             signInStore.setUser(signUpStore.user);
-            signInStore.singIn();
+            signInStore.signIn();
             setLoading(false);
           });
         }}

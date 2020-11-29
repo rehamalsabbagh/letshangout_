@@ -36,7 +36,7 @@ class SignInStore {
     this.usersStore.authUser = null;
   }
 
-  singIn() {
+  signIn() {
     this.clearErrorMessages();
     const _user = this.user.username.value;
     const _pass = this.user.password.value;
