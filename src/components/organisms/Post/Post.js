@@ -22,10 +22,10 @@ const time_icon_src =
   'https://www.flaticon.com/svg/static/icons/svg/2088/2088617.svg';
 const location_icon_src =
   'https://www.flaticon.com/svg/static/icons/svg/1008/1008001.svg';
-const going_icon_src =
-  'https://www.flaticon.com/svg/static/icons/svg/1612/1612618.svg';
-const going_colored_icon_src =
-  'https://www.flaticon.com/svg/static/icons/svg/1612/1612763.svg';
+const attend_icon_src =
+  'https://www.flaticon.com/svg/static/icons/svg/1189/1189164.svg';
+const attend_colored_icon_src =
+  'https://www.flaticon.com/svg/static/icons/svg/1189/1189113.svg';
 function Post(props) {
   const { postsStore } = useAppContext();
   const { usersStore } = useAppContext();
@@ -96,7 +96,7 @@ function Post(props) {
             <Icon
               size={'xlg'}
               style={{ cursor: 'pointer' }}
-              src={_userLike ? going_colored_icon_src : going_icon_src}
+              src={_userLike ? attend_colored_icon_src : attend_icon_src}
               onClick={() =>
                 _userLike
                   ? postsStore.unlikePost(_userLike, props.id, props.user.id)
