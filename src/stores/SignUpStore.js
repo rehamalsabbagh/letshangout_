@@ -86,7 +86,8 @@ class SignUpStore {
   addUser() {
     database.ref('/users').push({
       username: this.user.username.value,
-      password: this.user.password.value,
+      /// temporary encoding/decoding till a proper encryption/decryption is applied
+      password: window.btoa(this.user.password.value),
       email: this.user.email.value,
     });
   }

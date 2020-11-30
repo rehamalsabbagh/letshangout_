@@ -43,7 +43,8 @@ class SignInStore {
     const __user = this.usersStore.retriveUser(_user);
     const _booleans = {
       _isUsernameAvaliable: __user,
-      _isCorrectPassword: __user.password === _pass,
+      /// temporary encoding/decoding till a proper encryption/decryption is applied
+      _isCorrectPassword: window.atob(__user.password) === _pass,
       _isAllFilled: FormUtil.isAllFilled(this.user),
     };
     const _allTrue = FormUtil.allTrue(_booleans);
