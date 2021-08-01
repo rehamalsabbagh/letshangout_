@@ -24,8 +24,8 @@
   height: 30px;
   width: 30px;
   color: #fff;
-  top: 23px;
-  right: 23px;
+  top: 50px;
+  right: 60px;
   border-radius: 100px;
   padding: 6px;
   z-index: 9;
@@ -33,7 +33,7 @@
 
 @media screen and (max-width: 992px) {
   .lho_popup_close {
-    right: 19px;
+    right: 10px;
     top: 8px;
   }
 }
