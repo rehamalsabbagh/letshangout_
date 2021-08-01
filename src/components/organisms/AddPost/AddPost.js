@@ -82,7 +82,7 @@ function AddPost() {
         </Container>
       </Popup>
       <Container className={'lho_addpost_container'}>
-        {postsStore.authUserPosts === null && pressCount === 0 ? (
+        {postsStore.authUserPosts === null && popupStore.state === 'close' ? (
           <Container className={'lho_addpost_button_animation'} />
         ) : (
           <Container />

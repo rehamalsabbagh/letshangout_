@@ -29,8 +29,8 @@
   position: relative;
   animation-name: beam;
   animation-duration: 1s;
-  animation-iteration-count: 6;
-  animation-delay: 0.7s;
+  animation-iteration-count: 5;
+  animation-delay: 4s;
   opacity: 0.3;
 }
 
