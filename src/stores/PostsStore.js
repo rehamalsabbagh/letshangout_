@@ -11,6 +11,7 @@ class PostsStore {
     this.posts = null;
     this.authUserPosts = null;
     this.clearForm();
+    this.loading = false;
   }
 
   clearErrorMessages() {
@@ -59,8 +60,10 @@ class PostsStore {
   }
 
   getAllPosts() {
+    this.loading = true;
     let _following = this.usersStore.authUser.following;
     let _count = 0;
+    if (!_following) this.loading = false;
     for (const key in _following) {
       setTimeout(() => {
         this.getUserPosts(_following[key].user, _count === 0 ? false : true);
@@ -89,6 +92,7 @@ class PostsStore {
       if (connect) _this.posts = { ..._this.posts, ..._snapshotValue };
       if (_this.posts && Object.keys(_this.posts).length === 0)
         _this.posts = null;
+      this.loading = false;
     });
   }
 
@@ -124,6 +128,7 @@ decorate(PostsStore, {
   posts: observable,
   post: observable,
   errorMessages: observable,
+  loading: observable,
 });
 
 export default PostsStore;

@@ -3,6 +3,7 @@ import { useAppContext, useVm } from '../../../context';
 import Center from '../../atoms/Center/Center';
 import Container from '../../atoms/Container/Container';
 import Icon from '../../atoms/Icon/Icon';
+import Loader from '../../atoms/Loader/Loader';
 import Row from '../../atoms/Row/Row';
 import Spacing from '../../atoms/Spacing/Spacing';
 import Text from '../../atoms/Text/Text';
@@ -82,14 +83,21 @@ function NewsFeed() {
   return (
     <React.Fragment>
       <SearchAccounts popupStore={popupStore} />
-      <Container className={'lho_newsfeed'}>
-        {!usersStore.authUser.following &&
-          emptyFeedMessage(no_following_msg1, no_following_msg2)}
-        {!postsStore.posts && emptyFeedMessage(no_posts_msg1, no_posts_msg2)}
-        {usersStore.authUser.following && postsStore.posts && (
-          <Container style={_newsFeedStyle}>{posts()}</Container>
-        )}
-      </Container>
+      {postsStore.loading && (
+        <Container className={'lho_newsfeed'}>
+          <Loader />
+        </Container>
+      )}
+      {!postsStore.loading && (
+        <Container className={'lho_newsfeed'}>
+          {!usersStore.authUser.following &&
+            emptyFeedMessage(no_following_msg1, no_following_msg2)}
+          {!postsStore.posts && emptyFeedMessage(no_posts_msg1, no_posts_msg2)}
+          {usersStore.authUser.following && postsStore.posts && (
+            <Container style={_newsFeedStyle}>{posts()}</Container>
+          )}
+        </Container>
+      )}
     </React.Fragment>
   );
 }
