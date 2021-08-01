@@ -21,10 +21,11 @@
 
 .lho_popup_close {
   position: absolute;
+  height: 30px;
+  width: 30px;
   color: #fff;
   top: 23px;
   right: 23px;
-  border: 2px solid;
   border-radius: 100px;
   padding: 6px;
   z-index: 9;
