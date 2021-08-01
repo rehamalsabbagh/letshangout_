@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Container from '../../atoms/Container/Container';
 import Button from '../../atoms/Button/Button';
 import { useAppContext } from '../../../context/AppContext';
@@ -10,11 +10,11 @@ import Form from '../Form/Form';
 import './AddPost.css';
 import UploadImage from '../UploadImage/UploadImage';
 import { useVm } from '../../../context';
-
 let addpost_btn_icon_src =
   'https://www.flaticon.com/svg/static/icons/svg/864/864380.svg';
 
 function AddPost() {
+  const [pressCount, setPressCount] = useState(0);
   const { postsStore } = useAppContext();
   const { usersStore } = useAppContext();
   const popupStore = useVm(PopupStore);
@@ -22,6 +22,10 @@ function AddPost() {
     src: addpost_btn_icon_src,
     size: 'lg',
   };
+
+  useEffect(() => {
+    postsStore.getAuthUserPosts();
+  }, [postsStore]);
 
   return (
     <React.Fragment>
@@ -78,12 +82,20 @@ function AddPost() {
         </Container>
       </Popup>
       <Container className={'lho_addpost_container'}>
+        {postsStore.authUserPosts === null && pressCount === 0 ? (
+          <Container className={'lho_addpost_button_animation'} />
+        ) : (
+          <Container />
+        )}
         <Button
           className={'lho_addpost_button'}
           primaryColor={'#ffffff'}
           secondaryColor={'#454545'}
           icon={addPostBtnIcon}
-          onClick={() => popupStore.setState('open')}
+          onClick={() => {
+            popupStore.setState('open');
+            setPressCount(1);
+          }}
         />
       </Container>
     </React.Fragment>

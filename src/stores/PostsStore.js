@@ -9,6 +9,7 @@ class PostsStore {
     this.usersStore = usersStore;
     this.errorMessages = [];
     this.posts = null;
+    this.authUserPosts = null;
     this.clearForm();
   }
 
@@ -66,6 +67,17 @@ class PostsStore {
         _count++;
       }, 500);
     }
+  }
+
+  getAuthUserPosts(userId) {
+    let _this = this;
+    database.ref('/posts/' + userId).on('value', (snapshot) => {
+      let _snapshotValue = this.mergeWithIds(snapshot.val());
+      _this.authUserPosts = null;
+      _this.authUserPosts = _snapshotValue;
+      if (_this.authUserPosts && Object.keys(_this.authUserPosts).length === 0)
+        _this.authUserPosts = null;
+    });
   }
 
   getUserPosts(userId, connect) {
