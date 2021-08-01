@@ -92,7 +92,9 @@ function NewsFeed() {
         <Container className={'lho_newsfeed'}>
           {!usersStore.authUser.following &&
             emptyFeedMessage(no_following_msg1, no_following_msg2)}
-          {!postsStore.posts && emptyFeedMessage(no_posts_msg1, no_posts_msg2)}
+          {usersStore.authUser.following &&
+            !postsStore.posts &&
+            emptyFeedMessage(no_posts_msg1, no_posts_msg2)}
           {usersStore.authUser.following && postsStore.posts && (
             <Container style={_newsFeedStyle}>{posts()}</Container>
           )}
