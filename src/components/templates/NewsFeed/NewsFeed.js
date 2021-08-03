@@ -12,6 +12,7 @@ import SearchAccounts from '../SearchAccounts/SearchAccounts';
 import { observer } from 'mobx-react';
 import './NewsFeed.css';
 import Post from '../../organisms/Post/Post';
+import WalkThrough from '../WalkThrough/WalkThrough';
 
 const no_following_msg1 = 'You are not following any account';
 const no_following_msg2 = 'Follow your friends and check their hangouts!';
@@ -29,6 +30,7 @@ function NewsFeed() {
 
   useEffect(() => {
     postsStore.getAllPosts();
+    popupStore.setState('open');
   }, [postsStore]);
 
   function posts() {
@@ -82,7 +84,8 @@ function NewsFeed() {
 
   return (
     <React.Fragment>
-      <SearchAccounts popupStore={popupStore} />
+      <WalkThrough popupStore={popupStore} />
+      {/* <SearchAccounts popupStore={popupStore} /> */}
       {postsStore.loading && (
         <Container className={'lho_newsfeed'}>
           <Loader />
