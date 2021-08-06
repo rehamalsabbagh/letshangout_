@@ -6,7 +6,9 @@ import Text from '../../atoms/Text/Text';
 import Container from '../../atoms/Container/Container';
 import Popup from '../../atoms/Popup/Popup';
 import Slider from 'react-slick';
+import { useAppContext } from '../../../context';
 import './WalkThrough.css';
+
 const walk_through_img_domain = 'https://websiteimages.b-cdn.net/test/';
 const walk_through_text_1 =
   "You can start by searching your friends' accounts!";
@@ -14,8 +16,11 @@ const walk_through_text_2 =
   'Add an announcment for a hangout for your friends to see';
 const walk_through_text_3 = 'Add some information about your hangout';
 const walk_through_text_4 =
-  'Click the attend button for your friends to know you are interested!';
+  'Click the attend button if you are interested in a hangout!';
+
 function WalkThrough(props) {
+  const { usersStore } = useAppContext();
+
   var sliderRef = useRef(null);
   const sliderSettings = {
     infinite: false,
@@ -27,13 +32,41 @@ function WalkThrough(props) {
     dots: false,
   };
 
+  function close() {
+    usersStore.setWalkthroughBool();
+    props.popupStore.setState('close');
+  }
+
+  function button_(text, onClick, shape) {
+    return (
+      <Button
+        shape={shape}
+        onClick={onClick}
+        text={{
+          text: text,
+          // style: { fontWeight: 'bold' },
+        }}
+        style={{
+          width: '80px',
+          height: '27px',
+          display: 'inline-block',
+        }}
+      />
+    );
+  }
+
   function walkThroughSlide(walk_through_img, walk_through_text, index) {
     return (
       <Container>
-        <video autoPlay muted loop width={'720px'} height={'485px'}>
+        <video
+          autoPlay
+          muted
+          loop
+          style={{ width: 'calc(100% - 1px)', height: 'auto' }}
+        >
           <source
             src={walk_through_img_domain + walk_through_img}
-            type="video/mp4"
+            type={'video/mp4'}
           />
         </video>
         <Container style={{ height: '15px' }} />
@@ -41,35 +74,33 @@ function WalkThrough(props) {
           <Text
             level={'h6'}
             text={walk_through_text}
-            style={{ fontWeight: 'bold', display: 'inline-block' }}
+            style={{ fontWeight: '', display: 'inline-block' }}
           />
-          <Button
-            onClick={
-              index < 4
-                ? () => sliderRef.slickNext()
-                : () => props.popupStore.setState('close')
-            }
-            text={{
-              text: index < 4 ? 'Next' : 'Got it!',
-              style: { fontWeight: 'bold' },
-            }}
-            primaryColor={'#e5e5e5'}
-            secondaryColor={'#454545'}
+          <Container
             style={{
-              width: '150px',
-              height: '27px',
               float: 'right',
               display: 'inline-block',
               marginTop: '-5px',
             }}
-          />
+          >
+            {button_('Skip', () => close(), 'bordered')}
+            <Container style={{ width: '10px', display: 'inline-block' }} />
+            {button_(
+              index < 4 ? 'Next' : 'Got it!',
+              index < 4 ? () => sliderRef.slickNext() : () => close(),
+              'solid'
+            )}
+          </Container>
         </Container>
       </Container>
     );
   }
 
   return (
-    <Popup popupStore={props.popupStore}>
+    <Popup
+      popupStore={props.popupStore}
+      onClose={() => usersStore.setWalkthroughBool()}
+    >
       <Container className={'page_container'}>
         <Card>
           <Align align={'start'}>

@@ -70,6 +70,10 @@ class UsersStore {
   setUserImage(image) {
     database.ref('/users/' + this.authUser.id + '/image').set(image);
   }
+
+  setWalkthroughBool() {
+    database.ref('/users/' + this.authUser.id + '/walkthroughShown').set(true);
+  }
 }
 decorate(UsersStore, {
   users: observable,

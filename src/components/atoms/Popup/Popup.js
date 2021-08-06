@@ -7,11 +7,17 @@ import Image from '../Image/Image';
 function Poppup(props) {
   require('./Popup.css');
   const className = props.className + ' lho_popup ';
+
+  function close() {
+    props.popupStore.setState('close');
+    if (props.onClose != null) props.onClose();
+  }
+
   return (
     <Container
       {...props}
       className={className + props.popupStore.state}
-      onClick={() => props.popupStore.setState('close')}
+      onClick={() => close()}
     >
       <Image
         className={'lho_popup_close'}

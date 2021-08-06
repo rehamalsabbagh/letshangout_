@@ -30,7 +30,8 @@ function NewsFeed() {
 
   useEffect(() => {
     postsStore.getAllPosts();
-    popupStore.setState('open');
+    if (usersStore.authUser.walkthroughShown == null)
+      popupStore.setState('open');
   }, [postsStore]);
 
   function posts() {
@@ -82,10 +83,12 @@ function NewsFeed() {
     );
   }
 
+  let walkthroughShown = usersStore.authUser.walkthroughShown;
+
   return (
     <React.Fragment>
-      <WalkThrough popupStore={popupStore} />
-      {/* <SearchAccounts popupStore={popupStore} /> */}
+      {walkthroughShown == null && <WalkThrough popupStore={popupStore} />}
+      {walkthroughShown != null && <SearchAccounts popupStore={popupStore} />}
       {postsStore.loading && (
         <Container className={'lho_newsfeed'}>
           <Loader />
