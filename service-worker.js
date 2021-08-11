@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/letshangout_/precache-manifest.b4660f3e5abc15cc8ea77b5664aba0f8.js"
+  "/letshangout_/precache-manifest.7b8cf682295e6504cff50b294b877fbc.js"
 );
 
 self.addEventListener('message', (event) => {
